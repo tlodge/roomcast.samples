@@ -6,8 +6,8 @@ CREATE (ResidentsAG:AccessGroup {accessGroupId:'124',name:'resident', type:'occu
 
 //relates to developmentId
 CREATE (AllAG:AccessGroup {accessGroupId:'1', name:'all', type:'development', prefix:'in'})
-CREATE (SouthBlockAG:AccessGroup {accessGroupId:'125',name: 'North Block', type:'block', prefix:'in'})
-CREATE (NorthBlockAG:AccessGroup {accessGroupId:'125a',name: 'South Block', type:'block', prefix:'in'})
+CREATE (SouthBlockAG:AccessGroup {accessGroupId:'125',name: 'South Block', type:'block', prefix:'in'})
+CREATE (NorthBlockAG:AccessGroup {accessGroupId:'125a',name: 'North Block', type:'block', prefix:'in'})
 
 //floor acccess groups!
 CREATE (a1stFloorAG:AccessGroup {accessGroupId:'126',name:'1st', type:'floor', prefix:'on'})-[:BELONGS_TO]->(d)
