@@ -1,0 +1,1592 @@
+[
+    {
+        "type": "tab",
+        "id": "157822a6.d6c065",
+        "label": "info endpoints"
+    },
+    {
+        "type": "tab",
+        "id": "b03d872f.c1fed8",
+        "label": "action endpoints"
+    },
+    {
+        "id": "82371258.7dc8f",
+        "type": "mongodb",
+        "z": "",
+        "hostname": "mongo",
+        "port": "27017",
+        "db": "buttonkit",
+        "name": "buttonkit"
+    },
+    {
+        "id": "18ae77ef.b8fd6",
+        "type": "http in",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "url": "/postecho",
+        "method": "post",
+        "swaggerDoc": "",
+        "x": 96,
+        "y": 208,
+        "wires": [
+            [
+                "8b02afe7.622478",
+                "f168f168.8f08d8"
+            ]
+        ]
+    },
+    {
+        "id": "8b02afe7.622478",
+        "type": "template",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "field": "payload",
+        "format": "handlebars",
+        "template": "This is the payload: {{payload}} !",
+        "x": 414,
+        "y": 208,
+        "wires": [
+            [
+                "ffb1f96f.7c1a8",
+                "cc2ed875.ce60b8"
+            ]
+        ]
+    },
+    {
+        "id": "ffb1f96f.7c1a8",
+        "type": "debug",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 564.0000114440918,
+        "y": 302.00000762939453,
+        "wires": []
+    },
+    {
+        "id": "cc2ed875.ce60b8",
+        "type": "http response",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "x": 586.0000305175781,
+        "y": 152,
+        "wires": []
+    },
+    {
+        "id": "8ad83d91.99e928",
+        "type": "http in",
+        "z": "157822a6.d6c065",
+        "name": "bus times",
+        "url": "/bus",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 96,
+        "y": 372,
+        "wires": [
+            [
+                "d1a4294d.640db8",
+                "ad348cfd.52cb7"
+            ]
+        ]
+    },
+    {
+        "id": "67cdcf8a.8b86a8",
+        "type": "http response",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "x": 829,
+        "y": 426,
+        "wires": []
+    },
+    {
+        "id": "4bba1d24.b69c74",
+        "type": "http request",
+        "z": "157822a6.d6c065",
+        "name": "TFL bus predictions API",
+        "method": "GET",
+        "ret": "txt",
+        "url": "",
+        "x": 452,
+        "y": 430,
+        "wires": [
+            [
+                "f77850be.90359"
+            ]
+        ]
+    },
+    {
+        "id": "f77850be.90359",
+        "type": "tfl countdown to json",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "x": 674,
+        "y": 431,
+        "wires": [
+            [
+                "67cdcf8a.8b86a8"
+            ]
+        ]
+    },
+    {
+        "id": "d1a4294d.640db8",
+        "type": "publish",
+        "z": "157822a6.d6c065",
+        "name": "bus predicted times",
+        "property": "payload",
+        "rules": [
+            {
+                "type": "latlng",
+                "id": "coords",
+                "title": "coords"
+            }
+        ],
+        "description": "This endpoint will return all of the predicted bus times for buses within 100m radius of the development.  It gets its data from Transport for London",
+        "buttontype": "information",
+        "returntype": "tabular",
+        "x": 315,
+        "y": 324,
+        "wires": []
+    },
+    {
+        "id": "1ac5b80c.e53a48",
+        "type": "http in",
+        "z": "157822a6.d6c065",
+        "name": "bin store",
+        "url": "/binstore",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 101,
+        "y": 541,
+        "wires": [
+            [
+                "5ef3968a.a10c68",
+                "45c7c66c.ba3838"
+            ]
+        ]
+    },
+    {
+        "id": "5ef3968a.a10c68",
+        "type": "publish",
+        "z": "157822a6.d6c065",
+        "name": "bin store code",
+        "property": "payload",
+        "rules": [],
+        "description": "This is the bin store code for the bins next to the south block.",
+        "buttontype": "information",
+        "returntype": "number",
+        "x": 299,
+        "y": 493,
+        "wires": []
+    },
+    {
+        "id": "45c7c66c.ba3838",
+        "type": "function",
+        "z": "157822a6.d6c065",
+        "name": "get bin code",
+        "func": "msg.payload={data:12434, success:true}\nreturn msg;",
+        "outputs": 1,
+        "x": 286,
+        "y": 574,
+        "wires": [
+            [
+                "7fa17737.805e88"
+            ]
+        ]
+    },
+    {
+        "id": "7fa17737.805e88",
+        "type": "http response",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "x": 502,
+        "y": 574,
+        "wires": []
+    },
+    {
+        "id": "f060457d.0f9fb8",
+        "type": "http in",
+        "z": "157822a6.d6c065",
+        "name": "cinema listing",
+        "url": "/cinema",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 116,
+        "y": 679,
+        "wires": [
+            [
+                "ac5c1385.53a3f",
+                "79a9f8c0.865608"
+            ]
+        ]
+    },
+    {
+        "id": "ac5c1385.53a3f",
+        "type": "publish",
+        "z": "157822a6.d6c065",
+        "name": "cinema listing",
+        "property": "payload",
+        "rules": [
+            {
+                "type": "latlng",
+                "id": "coords",
+                "title": "coords"
+            }
+        ],
+        "description": "These are the latest cinema listings for the local cinemas",
+        "buttontype": "information",
+        "returntype": "tabular",
+        "x": 311,
+        "y": 635,
+        "wires": []
+    },
+    {
+        "id": "79a9f8c0.865608",
+        "type": "function",
+        "z": "157822a6.d6c065",
+        "name": "get cinema listings",
+        "func": "\nmsg.payload = {data:[\n        {cinema:\"showcase\", film:\"Star Wars\", times:\"11.30,14.30,16.30,18.30,20.45,21.30,22.10\"},  \n        {cinema:\"showcase\", film:\"Frozen\", times:\"9.30,14.30,16.30\"},\n        {cinema:\"showcase\", film:\"Shawshank Redemption\", times:\"14.30,16.30,20.45,21.30,22.10\"}\n    ],\n    success:true\n}\nreturn msg;",
+        "outputs": 1,
+        "x": 312,
+        "y": 712,
+        "wires": [
+            [
+                "ac0911c2.53f6f"
+            ]
+        ]
+    },
+    {
+        "id": "ac0911c2.53f6f",
+        "type": "http response",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "x": 521,
+        "y": 711,
+        "wires": []
+    },
+    {
+        "id": "86935d7b.796ca",
+        "type": "http in",
+        "z": "157822a6.d6c065",
+        "name": "latest webcam picture",
+        "url": "/webcam",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 144,
+        "y": 830,
+        "wires": [
+            [
+                "1d6b0f51.e294f1",
+                "c2182921.3de7d8"
+            ]
+        ]
+    },
+    {
+        "id": "1d6b0f51.e294f1",
+        "type": "function",
+        "z": "157822a6.d6c065",
+        "name": "get an image from the webcam",
+        "func": "msg.payload = {success:true, data:\"http://placehold.it/300.png/09f/fff\"};\nreturn msg;",
+        "outputs": 1,
+        "x": 447,
+        "y": 855,
+        "wires": [
+            [
+                "b000cf5.f4fff3"
+            ]
+        ]
+    },
+    {
+        "id": "b000cf5.f4fff3",
+        "type": "http response",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "x": 690,
+        "y": 856,
+        "wires": []
+    },
+    {
+        "id": "c2182921.3de7d8",
+        "type": "publish",
+        "z": "157822a6.d6c065",
+        "name": "webcam",
+        "property": "payload",
+        "rules": [
+            {
+                "type": "postcode",
+                "id": "postcode",
+                "title": "development postcode"
+            }
+        ],
+        "description": "This returns the latest image from the developments webcam.",
+        "buttontype": "information",
+        "returntype": "image",
+        "x": 361,
+        "y": 764,
+        "wires": []
+    },
+    {
+        "id": "f95675d8.06a988",
+        "type": "http in",
+        "z": "157822a6.d6c065",
+        "name": "policy",
+        "url": "/petpolicy",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 964,
+        "wires": [
+            [
+                "dc59eccb.23a61",
+                "48d691bc.b7297"
+            ]
+        ]
+    },
+    {
+        "id": "dc59eccb.23a61",
+        "type": "function",
+        "z": "157822a6.d6c065",
+        "name": "get pet policy",
+        "func": "msg.payload = {success:true, data:\"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\"};\nreturn msg;",
+        "outputs": 1,
+        "x": 307,
+        "y": 1003,
+        "wires": [
+            [
+                "c930baf.f36cf48"
+            ]
+        ]
+    },
+    {
+        "id": "48d691bc.b7297",
+        "type": "publish",
+        "z": "157822a6.d6c065",
+        "name": "pet policy",
+        "property": "payload",
+        "rules": [],
+        "description": "This provides the latest policy on pets.  It's quite a long description!",
+        "buttontype": "information",
+        "returntype": "text",
+        "x": 302,
+        "y": 913,
+        "wires": []
+    },
+    {
+        "id": "c930baf.f36cf48",
+        "type": "http response",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "x": 547,
+        "y": 1002,
+        "wires": []
+    },
+    {
+        "id": "ad348cfd.52cb7",
+        "type": "function",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "func": "var coords = msg.req.query.coords;\nmsg.url = \"http://countdown.api.tfl.gov.uk/interfaces/ura/instant_V1?Circle=\" + coords + \",200\";\nreturn msg;",
+        "outputs": 1,
+        "x": 251,
+        "y": 431,
+        "wires": [
+            [
+                "4bba1d24.b69c74"
+            ]
+        ]
+    },
+    {
+        "id": "3cfa3704.b24158",
+        "type": "http in",
+        "z": "b03d872f.c1fed8",
+        "name": "logger",
+        "url": "/log",
+        "method": "post",
+        "swaggerDoc": "",
+        "x": 83,
+        "y": 101,
+        "wires": [
+            [
+                "2405bf27.31f39",
+                "8f6a173a.361c28",
+                "605b8551.9fa47c"
+            ]
+        ]
+    },
+    {
+        "id": "2405bf27.31f39",
+        "type": "publish",
+        "z": "b03d872f.c1fed8",
+        "name": "log",
+        "property": "payload",
+        "rules": [
+            {
+                "type": "text",
+                "id": "name",
+                "title": "Please give a (unique) name for your log store"
+            },
+            {
+                "type": "userId",
+                "id": "userId",
+                "title": "user who pressed"
+            }
+        ],
+        "description": "This will log any incoming button press to a datastore.  Any questions that you ask when the button is pressed will be logged in this datastore.",
+        "buttontype": "action",
+        "x": 293,
+        "y": 49,
+        "wires": []
+    },
+    {
+        "id": "8f6a173a.361c28",
+        "type": "function",
+        "z": "b03d872f.c1fed8",
+        "name": "format incoming data",
+        "func": "console.log(\"PARCELS!!, got\");\nconsole.log(msg.payload);\n//everything is stored as id, label, type, value, so we convert questions to\n//this format and we append ts and userid using this format\n\nvar log = msg.payload.questions.map(function(question){\n        return {\n            id:question.number,\n            label:question.question,\n            type:question.type,\n            value:question.value,\n        }\n    });\n    \n    log.push({\n        id: 'presser',\n        label: \"button presser\",\n        type: \"user\",\n        value: msg.payload.userId,\n    });\n    \n    log.push({\n        id: 'pressed',\n        label: \"pressed\",\n        type: \"ts\",\n        value: Date.now(),\n    });\n    \nvar datatosave = {\n    collection: msg.payload.name,\n    payload: {data:log},\n};\n\nmsg.payload = {success:true};\nreturn [msg,datatosave];",
+        "outputs": "2",
+        "noerr": 0,
+        "x": 340,
+        "y": 157,
+        "wires": [
+            [
+                "7e82f0e3.9b2e5"
+            ],
+            [
+                "6b6a3537.9495cc",
+                "33b5ad77.44224a"
+            ]
+        ]
+    },
+    {
+        "id": "33b5ad77.44224a",
+        "type": "debug",
+        "z": "b03d872f.c1fed8",
+        "name": "logger action",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 595.0001831054688,
+        "y": 203.00003051757812,
+        "wires": []
+    },
+    {
+        "id": "7e82f0e3.9b2e5",
+        "type": "http response",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "x": 572.000244140625,
+        "y": 98,
+        "wires": []
+    },
+    {
+        "id": "e9033659.206db",
+        "type": "http in",
+        "z": "157822a6.d6c065",
+        "name": "directors",
+        "url": "/directors",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 113,
+        "y": 1121,
+        "wires": [
+            [
+                "36212281.0b57b6",
+                "a3ea9016.0be648"
+            ]
+        ]
+    },
+    {
+        "id": "9566f022.0ea11",
+        "type": "template",
+        "z": "157822a6.d6c065",
+        "name": "directors",
+        "field": "payload",
+        "format": "handlebars",
+        "template": "<div class=\"row\">\n  {{#payload}}\n     <div class=\"small-4 columns\">\n          <div class=\"row\">\n            <div class=\"small-12 columns\">\n              <img src=\"{{image}}\"/>\n            </div>\n          </div>\n          <div class=\"row\">\n            <div class=\"small-12 columns\">\n              <dl>\n                <dt>{{name}} <small> {{role}}</small></dt>\n                <dd>{{profile}}</dd>\n              </dl>\n            </div>\n          </div>\n          <div class=\"row\">\n            <div class=\"small-12 columns\">\n              <strong>{{phone}}</strong>\n            </div>\n          </div>\n      </div>     \n  {{/payload}}\n</div>",
+        "x": 433,
+        "y": 1165,
+        "wires": [
+            [
+                "58a93a84.f97c54"
+            ]
+        ]
+    },
+    {
+        "id": "58ae7941.0b78f8",
+        "type": "http response",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "x": 749,
+        "y": 1161,
+        "wires": []
+    },
+    {
+        "id": "36212281.0b57b6",
+        "type": "publish",
+        "z": "157822a6.d6c065",
+        "name": "Meet the directors",
+        "property": "payload",
+        "rules": [
+            {
+                "type": "latlng",
+                "id": "coords",
+                "title": "dev coords"
+            }
+        ],
+        "description": "Provides a overview of the current structure of management.",
+        "buttontype": "information",
+        "returntype": "html",
+        "x": 321,
+        "y": 1070,
+        "wires": []
+    },
+    {
+        "id": "a3ea9016.0be648",
+        "type": "function",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "func": "msg.payload=[\n        {\n            name:\"Chris Sam\", \n            profile:\"Member of the residents association for 5 years and lived here for ten. Work in the city as an accountant.\",\n            image: \"/media/img/director1.jpg\",    \n            role: \"chairman\", \n            phone: \"07973 456 789\"  \n         },\n         {\n            name:\"Jane Kelvey\", \n            profile:\"Relatively new to the area but lived in London all my life.  Two grown up children and stay at home husband\",\n            image: \"/media/img/director2.jpg\",    \n            role: \"treasurer\", \n            phone: \"07749 476 799\"  \n         },\n         {\n            name:\"Billy Trent\", \n            profile:\"Recently retired from TfL and playing as much golf as I can.  Lived in my block for 12 years\",\n            image: \"/media/img/director3.jpg\",    \n            role: \"secretary\", \n            phone: \"07973 456 789\"  \n         },\n        ];\nreturn msg;",
+        "outputs": 1,
+        "x": 271,
+        "y": 1165,
+        "wires": [
+            [
+                "9566f022.0ea11"
+            ]
+        ]
+    },
+    {
+        "id": "58a93a84.f97c54",
+        "type": "function",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "func": "msg.payload={data:msg.payload, success:true}\nreturn msg;",
+        "outputs": 1,
+        "x": 580,
+        "y": 1165,
+        "wires": [
+            [
+                "58ae7941.0b78f8"
+            ]
+        ]
+    },
+    {
+        "id": "25bd3c5c.da42c4",
+        "type": "http in",
+        "z": "b03d872f.c1fed8",
+        "name": "sms staff",
+        "url": "/sms/staff",
+        "method": "post",
+        "swaggerDoc": "",
+        "x": 73,
+        "y": 877.0000915527344,
+        "wires": [
+            [
+                "1787b30c.e8784d",
+                "aa561c85.55a9e",
+                "69be37c1.9641c8",
+                "a3a1f856.5c5e08"
+            ]
+        ]
+    },
+    {
+        "id": "1787b30c.e8784d",
+        "type": "function",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "func": "msg.payload={success:true};\nreturn msg;",
+        "outputs": 1,
+        "x": 318.0000305175781,
+        "y": 873.0001220703125,
+        "wires": [
+            [
+                "697183b8.968e7c"
+            ]
+        ]
+    },
+    {
+        "id": "697183b8.968e7c",
+        "type": "http response",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "x": 580.0000305175781,
+        "y": 825.0000305175781,
+        "wires": []
+    },
+    {
+        "id": "aa561c85.55a9e",
+        "type": "publish",
+        "z": "b03d872f.c1fed8",
+        "name": "sms",
+        "property": "payload",
+        "rules": [
+            {
+                "type": "staffselect",
+                "id": "staffids",
+                "title": "staff"
+            },
+            {
+                "type": "text",
+                "id": "message",
+                "title": "message"
+            }
+        ],
+        "description": "Send a text message (of your choice) to a staff member.",
+        "buttontype": "action",
+        "x": 332,
+        "y": 712.0000610351562,
+        "wires": []
+    },
+    {
+        "id": "69be37c1.9641c8",
+        "type": "debug",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 338,
+        "y": 951.0000305175781,
+        "wires": []
+    },
+    {
+        "id": "a3a1f856.5c5e08",
+        "type": "function",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "func": "msg.topic   = \"07972639571\";\nmsg.payload = msg.payload.message; \nreturn msg;",
+        "outputs": 1,
+        "x": 326,
+        "y": 785.0000610351562,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d0baff58.2f45",
+        "type": "http in",
+        "z": "157822a6.d6c065",
+        "name": "scammers",
+        "url": "/scammers",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 1286,
+        "wires": [
+            [
+                "b96d595f.4692a8",
+                "b442a801.4bbd58"
+            ]
+        ]
+    },
+    {
+        "id": "b96d595f.4692a8",
+        "type": "publish",
+        "z": "157822a6.d6c065",
+        "name": "scammers",
+        "property": "payload",
+        "rules": [
+            {
+                "type": "userid",
+                "id": "userids",
+                "title": ""
+            }
+        ],
+        "description": "Latest images of known criminals in the area",
+        "buttontype": "information",
+        "returntype": "image",
+        "x": 313,
+        "y": 1245,
+        "wires": []
+    },
+    {
+        "id": "b442a801.4bbd58",
+        "type": "function",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "func": "msg.payload = {success:true, data:\"/media/img/scammer.jpg\"};\nreturn msg;",
+        "outputs": 1,
+        "x": 308,
+        "y": 1351,
+        "wires": [
+            [
+                "b35faad3.4ca058"
+            ]
+        ]
+    },
+    {
+        "id": "b35faad3.4ca058",
+        "type": "http response",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "x": 528,
+        "y": 1357,
+        "wires": []
+    },
+    {
+        "id": "3e691f50.c196e",
+        "type": "http in",
+        "z": "157822a6.d6c065",
+        "name": "bike cage directions",
+        "url": "/directions",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 119,
+        "y": 1493,
+        "wires": [
+            [
+                "b877382d.4788c8",
+                "de4d6c1f.21b29"
+            ]
+        ]
+    },
+    {
+        "id": "b877382d.4788c8",
+        "type": "publish",
+        "z": "157822a6.d6c065",
+        "name": "bike cage directions",
+        "property": "payload",
+        "rules": [],
+        "description": "directions to the new bike cages",
+        "buttontype": "information",
+        "returntype": "image",
+        "x": 356,
+        "y": 1433,
+        "wires": []
+    },
+    {
+        "id": "de4d6c1f.21b29",
+        "type": "function",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "func": "msg.payload = {success:true, data:\"/media/img/directions.png\"};\nreturn msg;",
+        "outputs": 1,
+        "x": 334,
+        "y": 1591,
+        "wires": [
+            [
+                "c5d5e867.3a2a18"
+            ]
+        ]
+    },
+    {
+        "id": "c5d5e867.3a2a18",
+        "type": "http response",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "x": 578,
+        "y": 1559,
+        "wires": []
+    },
+    {
+        "id": "f79841e4.0867c",
+        "type": "http in",
+        "z": "157822a6.d6c065",
+        "name": "newtest",
+        "url": "/test",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 69.88888549804688,
+        "y": 70.88888549804688,
+        "wires": [
+            [
+                "f5f37b74.0a0c88",
+                "3860e82c.c79f18"
+            ]
+        ]
+    },
+    {
+        "id": "f5f37b74.0a0c88",
+        "type": "debug",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "active": true,
+        "console": "true",
+        "complete": "payload",
+        "x": 296.8888854980469,
+        "y": 143.88888549804688,
+        "wires": []
+    },
+    {
+        "id": "648707bf.9b78f8",
+        "type": "http response",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "x": 444.8888854980469,
+        "y": 44.888885498046875,
+        "wires": []
+    },
+    {
+        "id": "f168f168.8f08d8",
+        "type": "function",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "func": "var data = msg.payload;\nconsole.log(data)\nreturn msg;",
+        "outputs": 1,
+        "x": 270,
+        "y": 246,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3860e82c.c79f18",
+        "type": "function",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "func": "msg.payload={success:\"atlast!\"}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 276.8888854980469,
+        "y": 34.888885498046875,
+        "wires": [
+            [
+                "648707bf.9b78f8"
+            ]
+        ]
+    },
+    {
+        "id": "6b6a3537.9495cc",
+        "type": "mongodb out",
+        "z": "b03d872f.c1fed8",
+        "mongodb": "82371258.7dc8f",
+        "name": "save to values to store",
+        "collection": "",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 622.8895263671875,
+        "y": 151.88888549804688,
+        "wires": []
+    },
+    {
+        "id": "f874d0ba.078b3",
+        "type": "http in",
+        "z": "b03d872f.c1fed8",
+        "name": "pickup parcel",
+        "url": "/parcel/pickup",
+        "method": "post",
+        "swaggerDoc": "",
+        "x": 96,
+        "y": 563.4444580078125,
+        "wires": [
+            [
+                "bc38c209.43c74",
+                "746a1b6f.8b95e4",
+                "76fe35a5.8901cc",
+                "cc82c541.337d38",
+                "f54e4cca.0ab1b"
+            ]
+        ]
+    },
+    {
+        "id": "bc38c209.43c74",
+        "type": "publish",
+        "z": "b03d872f.c1fed8",
+        "name": "parcel pickup",
+        "property": "payload",
+        "rules": [
+            {
+                "type": "datastoreitem",
+                "id": "datastoreitem",
+                "title": "the parcel that has been picked up",
+                "number": 0,
+                "values": {
+                    "store": {
+                        "storeId": "parcels",
+                        "name": "parcels"
+                    }
+                }
+            },
+            {
+                "type": "userId",
+                "id": "userId",
+                "title": "userId"
+            },
+            {
+                "type": "signature",
+                "id": "signature",
+                "title": "please provide your signature",
+                "number": 2,
+                "values": {}
+            }
+        ],
+        "description": "Use this when a user has picked up a parcel.  This will prompt the button presser for a user and a signature.  It will remove the parcel from the list of those to be collected and log the signature in the collected parcels datastore",
+        "buttontype": "action",
+        "x": 323.888916015625,
+        "y": 446.4444274902344,
+        "wires": []
+    },
+    {
+        "id": "746a1b6f.8b95e4",
+        "type": "function",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "func": "msg.payload = {success:true};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 306.8890075683594,
+        "y": 494.0001220703125,
+        "wires": [
+            [
+                "35541dfc.caabe2"
+            ]
+        ]
+    },
+    {
+        "id": "35541dfc.caabe2",
+        "type": "http response",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "x": 505.8890075683594,
+        "y": 481.0001220703125,
+        "wires": []
+    },
+    {
+        "id": "71fedbb0.8e0124",
+        "type": "http in",
+        "z": "b03d872f.c1fed8",
+        "name": "notify",
+        "url": "/notify",
+        "method": "post",
+        "swaggerDoc": "",
+        "x": 80.88888549804688,
+        "y": 340.8888854980469,
+        "wires": [
+            [
+                "6fb92ae3.9046d4",
+                "b6dac308.49254",
+                "e463e62d.1b9c18"
+            ]
+        ]
+    },
+    {
+        "id": "6fb92ae3.9046d4",
+        "type": "publish",
+        "z": "b03d872f.c1fed8",
+        "name": "notify a user",
+        "property": "payload",
+        "rules": [
+            {
+                "type": "users",
+                "id": "user",
+                "title": "which user would you like to notify?",
+                "number": 0,
+                "values": {}
+            },
+            {
+                "type": "freetext",
+                "id": "text",
+                "title": "your note",
+                "number": 1,
+                "values": {}
+            }
+        ],
+        "description": "notify a chosen user with a message of your choice.",
+        "buttontype": "action",
+        "x": 316.8888854980469,
+        "y": 294.8888702392578,
+        "wires": []
+    },
+    {
+        "id": "b6dac308.49254",
+        "type": "function",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "func": "msg.payload = {success:true};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 298.8888854980469,
+        "y": 391.77777099609375,
+        "wires": [
+            [
+                "4c689679.b39768"
+            ]
+        ]
+    },
+    {
+        "id": "4c689679.b39768",
+        "type": "http response",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "x": 496.8888854980469,
+        "y": 376.77777099609375,
+        "wires": []
+    },
+    {
+        "id": "76fe35a5.8901cc",
+        "type": "function",
+        "z": "b03d872f.c1fed8",
+        "name": "create remove query",
+        "func": "var mongo = context.global.mongo;\n\n\nvar parceldata = msg.payload.datastoreitem.value;\n\nvar msg = {\n    collection: 'parcels',\n    payload:{\n       _id: new mongo.ObjectID(parceldata.id)\n    }\n}\n\nreturn msg;",
+        "outputs": "1",
+        "noerr": 0,
+        "x": 345.0002136230469,
+        "y": 561.888916015625,
+        "wires": [
+            [
+                "aa29258f.55d6d8"
+            ]
+        ]
+    },
+    {
+        "id": "aa29258f.55d6d8",
+        "type": "mongodb out",
+        "z": "b03d872f.c1fed8",
+        "mongodb": "82371258.7dc8f",
+        "name": "remove from parcels collection",
+        "collection": "",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 596.0003967285156,
+        "y": 539.888916015625,
+        "wires": []
+    },
+    {
+        "id": "cc82c541.337d38",
+        "type": "function",
+        "z": "b03d872f.c1fed8",
+        "name": "create collected query",
+        "func": "console.log(\"OK RECEIVED PARCEL PICKUP DATA!\");\nconsole.log(msg.payload);\n\n//this is identical (or should be) to the logging node\n\n//var parceldata = msg.payload.datastoreitem.value;\n//var url = msg.payload.signature;\nvar log = msg.payload.questions.map(function(question){\n        return {\n            id:question.number,\n            label:question.question,\n            type:question.type,\n            value:question.value,\n        }\n    });\n    \n    log.push({\n        id: 'presser',\n        label: \"button presser\",\n        type: \"user\",\n        value: msg.payload.userId,\n    });\n    \n    log.push({\n        id: 'pressed',\n        label: \"pressed\",\n        type: \"ts\",\n        value: Date.now(),\n    });\n    \n/*var data = parceldata.questions.reduce(function(acc, obj){\n    acc[obj.question] = acc[obj.question] || {type:obj.type, value: obj.value};\n    return acc;\n},{recorded:parceldata.ts, pickedup:Date.now(), signature:url});\n*/\n\nvar msg = {\n    collection: 'collected',\n    payload: {data:log},\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 354.88897705078125,
+        "y": 611.7778930664062,
+        "wires": [
+            [
+                "9f9f0126.6061",
+                "9cc2c6b9.633d38"
+            ]
+        ]
+    },
+    {
+        "id": "9cc2c6b9.633d38",
+        "type": "mongodb out",
+        "z": "b03d872f.c1fed8",
+        "mongodb": "82371258.7dc8f",
+        "name": "add to collected collection",
+        "collection": "",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 611.8890380859375,
+        "y": 592.7778930664062,
+        "wires": []
+    },
+    {
+        "id": "9f9f0126.6061",
+        "type": "debug",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 590.888916015625,
+        "y": 652.2222290039062,
+        "wires": []
+    },
+    {
+        "id": "1d5c6309.e2a39d",
+        "type": "http in",
+        "z": "b03d872f.c1fed8",
+        "name": "test questions",
+        "url": "/testquestions",
+        "method": "post",
+        "swaggerDoc": "",
+        "x": 89.88888549804688,
+        "y": 1080.2222290039062,
+        "wires": [
+            [
+                "31a6518f.ce59ae",
+                "8baa769e.745588",
+                "b2a30e3c.4d5cf"
+            ]
+        ]
+    },
+    {
+        "id": "31a6518f.ce59ae",
+        "type": "function",
+        "z": "b03d872f.c1fed8",
+        "name": "success",
+        "func": "msg.payload = {success:true};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320.8888854980469,
+        "y": 1084.2221069335938,
+        "wires": [
+            [
+                "bb87f015.44781"
+            ]
+        ]
+    },
+    {
+        "id": "bb87f015.44781",
+        "type": "http response",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "x": 546.8889770507812,
+        "y": 1082.2221069335938,
+        "wires": []
+    },
+    {
+        "id": "8baa769e.745588",
+        "type": "debug",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 335.8888854980469,
+        "y": 1150.2222290039062,
+        "wires": []
+    },
+    {
+        "id": "b2a30e3c.4d5cf",
+        "type": "publish",
+        "z": "b03d872f.c1fed8",
+        "name": "question test",
+        "property": "payload",
+        "rules": [
+            {
+                "type": "signature",
+                "id": "yoursignature",
+                "title": "your seignature",
+                "number": 0,
+                "values": {}
+            },
+            {
+                "type": "options",
+                "id": "specialop",
+                "title": "what are the options?",
+                "number": 1,
+                "values": {
+                    "options": "one,two,three",
+                    "multiple": "no"
+                }
+            }
+        ],
+        "description": "this will test to see if actions can insert their own questions!",
+        "buttontype": "action",
+        "x": 325.8888854980469,
+        "y": 1019.2222395826275,
+        "wires": []
+    },
+    {
+        "id": "2ec1d3cb.d13e2c",
+        "type": "http in",
+        "z": "157822a6.d6c065",
+        "name": "logstore",
+        "url": "/logstore",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 86.88888549804688,
+        "y": 1729,
+        "wires": [
+            [
+                "ee5476b9.11ab88",
+                "ca6968e3.359698",
+                "5e7e3687.a181c8"
+            ]
+        ]
+    },
+    {
+        "id": "ee5476b9.11ab88",
+        "type": "function",
+        "z": "157822a6.d6c065",
+        "name": "extract collection",
+        "func": "var datastore = msg.payload.datastore;\nvar collection = datastore.storeId;\nmsg.collection = collection;\nmsg.limit = 1000;\nmsg.skip = 0;\nmsg.payload = {};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 289.8888854980469,
+        "y": 1818,
+        "wires": [
+            [
+                "80fb15f4.7f04e8"
+            ]
+        ]
+    },
+    {
+        "id": "6cf4395a.930bc8",
+        "type": "http response",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "x": 845.888916015625,
+        "y": 1753,
+        "wires": []
+    },
+    {
+        "id": "ca6968e3.359698",
+        "type": "publish",
+        "z": "157822a6.d6c065",
+        "name": "logstore",
+        "property": "payload",
+        "rules": [
+            {
+                "type": "datastore",
+                "id": "datastore",
+                "title": "name of the logstore you would like to display"
+            }
+        ],
+        "description": "This will return the data from a log store in a table.",
+        "buttontype": "information",
+        "returntype": "tabular",
+        "x": 267.8888854980469,
+        "y": 1658,
+        "wires": []
+    },
+    {
+        "id": "e463e62d.1b9c18",
+        "type": "debug",
+        "z": "b03d872f.c1fed8",
+        "name": "notify action",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 311.8888854980469,
+        "y": 338.8888854980469,
+        "wires": []
+    },
+    {
+        "id": "800f689a.7ff098",
+        "type": "debug",
+        "z": "b03d872f.c1fed8",
+        "name": "extracted",
+        "active": true,
+        "console": "false",
+        "complete": "payload.parceldata",
+        "x": 518.8889465332031,
+        "y": 756.1111145019531,
+        "wires": []
+    },
+    {
+        "id": "ed1711e4.12e8f",
+        "type": "debug",
+        "z": "157822a6.d6c065",
+        "name": "logstore returned results",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 887.888916015625,
+        "y": 1877.4443359375,
+        "wires": []
+    },
+    {
+        "id": "95429ef0.6abd6",
+        "type": "http in",
+        "z": "b03d872f.c1fed8",
+        "name": "delete item",
+        "url": "/deleteitem",
+        "method": "post",
+        "swaggerDoc": "",
+        "x": 92.88888549804688,
+        "y": 242.88888549804688,
+        "wires": [
+            [
+                "3b1ba47a.c4e45c"
+            ]
+        ]
+    },
+    {
+        "id": "3b1ba47a.c4e45c",
+        "type": "function",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "func": "msg.payload = {success: true}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 307.8888854980469,
+        "y": 242.88888549804688,
+        "wires": [
+            [
+                "f0aa6fb2.0f559"
+            ]
+        ]
+    },
+    {
+        "id": "f0aa6fb2.0f559",
+        "type": "http response",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "x": 490.8888854980469,
+        "y": 242.88888549804688,
+        "wires": []
+    },
+    {
+        "id": "f54e4cca.0ab1b",
+        "type": "debug",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 334.888916015625,
+        "y": 666.3333740234375,
+        "wires": []
+    },
+    {
+        "id": "bec3760d.413c88",
+        "type": "users",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "x": 321.8888854980469,
+        "y": 1260,
+        "wires": [
+            [
+                "5486db09.ab7924"
+            ]
+        ]
+    },
+    {
+        "id": "5486db09.ab7924",
+        "type": "debug",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 537.8888854980469,
+        "y": 1259,
+        "wires": []
+    },
+    {
+        "id": "2a0f2948.d5f0d6",
+        "type": "inject",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "topic": "",
+        "payload": "58",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 105.88888549804688,
+        "y": 1260.9998779296875,
+        "wires": [
+            [
+                "bec3760d.413c88"
+            ]
+        ]
+    },
+    {
+        "id": "80fb15f4.7f04e8",
+        "type": "mongodb in",
+        "z": "157822a6.d6c065",
+        "mongodb": "82371258.7dc8f",
+        "name": "retrieve records",
+        "collection": "",
+        "operation": "find",
+        "x": 484,
+        "y": 1818,
+        "wires": [
+            [
+                "1107945d.eef86c"
+            ]
+        ]
+    },
+    {
+        "id": "1107945d.eef86c",
+        "type": "function",
+        "z": "157822a6.d6c065",
+        "name": "format results",
+        "func": "var moment = context.global.moment;\n \n \n//pull out all keys to create a [{id:,label:},{id:,label:}] for display\n//note that keys are optional - if not provided buttonkit infers from ids\n//in rows\nvar keydict = msg.payload.reduce(function(acc, item){\n    item.data.forEach(function(row){\n      acc[row.id]=row.label\n    });\n    return acc;\n},{});\n\nvar keys = Object.keys(keydict).map(function(key){\n    return {id:key, label:keydict[key]};    \n});\n\nvar data = msg.payload.map(function(item){\n   delete item._id;\n   \n  \n   var rows = item.data.reduce(function(acc, col){\n        var type = col.type;\n        var value = col.value;\n        var key = col.id;\n        \n        //need to figure out how we display a datastore item!\n        switch(type){\n            case \"signature\":\n                acc[key] = \"<a class='th' href='\" + value + \"'><img src='\" + value  + \"'></a>\";\n                break;\n            case \"users\":\n                acc[key] = value.firstname + \" \" + value.surname;\n                break;\n            case \"ts\":\n                acc[key] = moment(value).format(\"MMMM Do YYYY, h:mm:ss\");  \n                break;\n            default:\n                acc[key] = value;\n        }\n        return acc;\n   },{});\n\n   return rows;\n});\nmsg.payload = {data:data, keys:keys, success:true};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 666,
+        "y": 1818,
+        "wires": [
+            [
+                "6cf4395a.930bc8",
+                "ed1711e4.12e8f"
+            ]
+        ]
+    },
+    {
+        "id": "5e7e3687.a181c8",
+        "type": "debug",
+        "z": "157822a6.d6c065",
+        "name": "message for info",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 287,
+        "y": 1722,
+        "wires": []
+    },
+    {
+        "id": "ef5e0770.10a1f8",
+        "type": "http in",
+        "z": "b03d872f.c1fed8",
+        "name": "everything",
+        "url": "/everything",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 101,
+        "y": 1396,
+        "wires": [
+            [
+                "a9df42e8.5620c",
+                "39acf55a.c6530a"
+            ]
+        ]
+    },
+    {
+        "id": "a9df42e8.5620c",
+        "type": "publish",
+        "z": "b03d872f.c1fed8",
+        "name": "everything",
+        "property": "payload",
+        "rules": [
+            {
+                "type": "userId",
+                "id": "userid",
+                "title": "the users id"
+            },
+            {
+                "type": "staffselect",
+                "id": "staff",
+                "title": "the members of staff"
+            },
+            {
+                "type": "userselect",
+                "id": "residents",
+                "title": "the residents"
+            },
+            {
+                "type": "text",
+                "id": "text",
+                "title": "some text"
+            },
+            {
+                "type": "developmentId",
+                "id": "developmentId",
+                "title": "the id of the development"
+            },
+            {
+                "type": "latlng",
+                "id": "developmentcoords",
+                "title": "the coords of the dev"
+            },
+            {
+                "type": "postcode",
+                "id": "developmentpostcode",
+                "title": "the postcode of the development"
+            },
+            {
+                "type": "datastore",
+                "id": "datastoreid",
+                "title": "the name of the datastore"
+            },
+            {
+                "type": "freetext",
+                "id": "a text question",
+                "title": "a special text question"
+            },
+            {
+                "type": "options",
+                "id": "options",
+                "title": "what are the options"
+            },
+            {
+                "type": "date",
+                "id": "time",
+                "title": "what time?"
+            },
+            {
+                "type": "users",
+                "id": "which users?",
+                "title": "which users?"
+            },
+            {
+                "type": "signature",
+                "id": "your signature",
+                "title": "signature please!"
+            },
+            {
+                "type": "datastoreitem",
+                "id": "datastoreitem",
+                "title": "my datastoreitem"
+            }
+        ],
+        "description": "Gets evey possible thing and sends it to node",
+        "buttontype": "action",
+        "x": 333,
+        "y": 1321,
+        "wires": []
+    },
+    {
+        "id": "39acf55a.c6530a",
+        "type": "function",
+        "z": "b03d872f.c1fed8",
+        "name": "success",
+        "func": "msg.payload = {success:true};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 328,
+        "y": 1406,
+        "wires": [
+            [
+                "fea467a7.015b98"
+            ]
+        ]
+    },
+    {
+        "id": "fea467a7.015b98",
+        "type": "http response",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "x": 560,
+        "y": 1397,
+        "wires": []
+    },
+    {
+        "id": "605b8551.9fa47c",
+        "type": "debug",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 313,
+        "y": 106,
+        "wires": []
+    },
+    {
+        "id": "a07635f5.5f89c8",
+        "type": "inject",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 104,
+        "y": 1964,
+        "wires": [
+            [
+                "85c64766.7a39b8"
+            ]
+        ]
+    },
+    {
+        "id": "85c64766.7a39b8",
+        "type": "function",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "func": "msg.payload ={\n    datastore : {\n        storeId: 'collected'\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 266,
+        "y": 1965,
+        "wires": [
+            [
+                "ee5476b9.11ab88"
+            ]
+        ]
+    }
+]
