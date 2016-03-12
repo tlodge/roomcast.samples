@@ -102,10 +102,10 @@ CREATE (b1:Button {buttonId:'b5',  type:'action', name:'report noise!', descript
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {questionId:'q0', number:0, question:'what is the source of the noise?', type:'options', values:'{"options":"fellow resident, non-residents, machinery, vehicle, other","multiple":"single","none":true}'})
-CREATE (q1:Question {questionId:'q1', number:1, question:'is it still happening now?', type:'options', values:'{"options":"yes,no","multiple":"single","none":true}'  
-CREATE (q2:Question {questionId:'q2', number:2, question:'how long has it been going on for?', type:'options', values:'{"options":"15 min, 1 hour, an hour plus","multiple":"single","none":true}'
-CREATE (q3:Question {questionId:'q3', number:3, question:'is this the first time you have been disturbed by this noise?', type:'options', values:'{"options":"yes,no","multiple":"single","none":true}' 
-CREATE (q4:Question {questionId:'q4', number:4, question:'is this the first time you have reported this noise?', type:'options', values:'{"options":"yes,no","multiple":"single","none":true}' 
+CREATE (q1:Question {questionId:'q1', number:1, question:'is it still happening now?', type:'options', values:'{"options":"yes,no","multiple":"single","none":true}'})  
+CREATE (q2:Question {questionId:'q2', number:2, question:'how long has it been going on for?', type:'options', values:'{"options":"15 min, 1 hour, an hour plus","multiple":"single","none":true}'})
+CREATE (q3:Question {questionId:'q3', number:3, question:'is this the first time you have been disturbed by this noise?', type:'options', values:'{"options":"yes,no","multiple":"single","none":true}'}) 
+CREATE (q4:Question {questionId:'q4', number:4, question:'is this the first time you have reported this noise?', type:'options', values:'{"options":"yes,no","multiple":"single","none":true}'}) 
 CREATE (q5:Question {questionId:'q5', number:5, question:'is there anything else we should know?', type:'freetext', values:'{"length":160}'})
 CREATE (b1)-[:ASKS]->(q0)
 CREATE (b1)-[:ASKS]->(q1)
