@@ -75,7 +75,7 @@ CREATE b1-[:MEMBER_OF]->(cat);
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b4',  type:'action', name:'property issue', description:'use this button to report any issues related to the common parts of wharfside (faulty doors, worn carpets, broken lights etc).  These will be sent immediately to the maintenance team who aim to investigate all reports within 2 hours.' created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b4',  type:'action', name:'property issue', description:'use this button to report any issues related to the common parts of wharfside (faulty doors, worn carpets, broken lights etc).  These will be sent immediately to the maintenance team who aim to investigate all reports within 2 hours.', created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {questionId:'q0', number:0, question:'how urgent is it?', type:'options', values:'{"options":"high, medium, low","multiple":"single","none":true}'})
@@ -98,7 +98,7 @@ CREATE b1-[:MEMBER_OF]->(cat);
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b5',  type:'action', name:'report noise!', description:'use this button when there is excessive noise between <strong> 10pm and 7am </strong> that has been going on for more than <strong> 15 </strong> minutes.  Your report will be logged in the system for future reference and will be correlated with similar reports, should we need to take further action.' created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b5',  type:'action', name:'report noise!', description:'use this button when there is excessive noise between <strong> 10pm and 7am </strong> that has been going on for more than <strong> 15 </strong> minutes.  Your report will be logged in the system for future reference and will be correlated with similar reports, should we need to take further action.', created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {questionId:'q0', number:0, question:'what is the source of the noise?', type:'options', values:'{"options":"fellow resident, non-residents, machinery, vehicle, other","multiple":"single","none":true}'})
@@ -127,7 +127,7 @@ CREATE b1-[:MEMBER_OF]->(cat);
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b6',  type:'action', name:'antisocial behaviour', description:'use this button to notify us of any antisocial behaviour, for example: <strong> trespassing, vandalism, graffiti, litter</strong>.  We will aim to investigate any antisocial behaviour as a matter of priority.' created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b6',  type:'action', name:'antisocial behaviour', description:'use this button to notify us of any antisocial behaviour, for example: <strong> trespassing, vandalism, graffiti, litter</strong>.  We will aim to investigate any antisocial behaviour as a matter of priority.', created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {questionId:'q0', number:0, question:'what is the issue?', type:'options', values:'{"options":"trespasser, vandalism, graffiti, litter, assault, other","multiple":"single","none":true}'})
@@ -150,7 +150,7 @@ CREATE b1-[:MEMBER_OF]->(cat);
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b7',  type:'action', name:'dry cleaning', description:'use this button if you would like to have items dry cleaned.  We have an arrangement with <strong>[Dry Cleaners inc]</strong> who we believe offer the best service in this area.  Costs are: shirts <strong>£5</strong>,  single bed sheets (2 pillow cases, duvet covers, and sheet): <strong>£25</strong>, double bed sheets:   (2 pillow cases, duvet covers, and sheet):  <strong>£29</strong>, suits: <strong>£25</strong>, dresses: <strong>£25</strong>.' created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b7',  type:'action', name:'dry cleaning', description:'use this button if you would like to have items dry cleaned.  We have an arrangement with <strong>[Dry Cleaners inc]</strong> who we believe offer the best service in this area.  Costs are: shirts <strong>£5</strong>,  single bed sheets (2 pillow cases, duvet covers, and sheet): <strong>£25</strong>, double bed sheets:   (2 pillow cases, duvet covers, and sheet):  <strong>£29</strong>, suits: <strong>£25</strong>, dresses: <strong>£25</strong>.', created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {questionId:'q0', number:0, question:'please list the items you would like cleaned', type:'freetext', values:'{"length":160}'})
