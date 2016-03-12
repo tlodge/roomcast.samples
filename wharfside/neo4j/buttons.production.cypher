@@ -39,7 +39,7 @@ WITH b1
 MATCH (bag1:AccessGroup {name:'tenant'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
-CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thanks, your new fob request is now in the system.  We will aim get back to you within 1-3 working days for you to pick it up from the concierge's office.'})
+CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thanks, your new fob request is now in the system.  We will aim get back to you within 1-3 working days for you to pick it up from the concierge office.'})
 WITH b1
 MATCH (cat:ButtonCategory {name:'Concierge'})
 CREATE b1-[:MEMBER_OF]->(cat);
