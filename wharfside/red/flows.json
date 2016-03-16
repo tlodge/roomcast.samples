@@ -26,8 +26,8 @@
         "url": "/postecho",
         "method": "post",
         "swaggerDoc": "",
-        "x": 96,
-        "y": 208,
+        "x": 93,
+        "y": 249,
         "wires": [
             [
                 "8b02afe7.622478",
@@ -43,8 +43,8 @@
         "field": "payload",
         "format": "handlebars",
         "template": "This is the payload: {{payload}} !",
-        "x": 414,
-        "y": 208,
+        "x": 301,
+        "y": 236,
         "wires": [
             [
                 "ffb1f96f.7c1a8",
@@ -60,8 +60,8 @@
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 564.0000114440918,
-        "y": 302.00000762939453,
+        "x": 616,
+        "y": 300,
         "wires": []
     },
     {
@@ -69,8 +69,8 @@
         "type": "http response",
         "z": "157822a6.d6c065",
         "name": "",
-        "x": 586.0000305175781,
-        "y": 152,
+        "x": 575.0000610351562,
+        "y": 224,
         "wires": []
     },
     {
@@ -95,8 +95,8 @@
         "type": "http response",
         "z": "157822a6.d6c065",
         "name": "",
-        "x": 829,
-        "y": 426,
+        "x": 873,
+        "y": 430,
         "wires": []
     },
     {
@@ -144,8 +144,8 @@
         "description": "This endpoint will return all of the predicted bus times for buses within 100m radius of the development.  It gets its data from Transport for London",
         "buttontype": "information",
         "returntype": "tabular",
-        "x": 315,
-        "y": 324,
+        "x": 337,
+        "y": 371,
         "wires": []
     },
     {
@@ -823,8 +823,8 @@
         "name": "",
         "func": "var data = msg.payload;\nconsole.log(data)\nreturn msg;",
         "outputs": 1,
-        "x": 270,
-        "y": 246,
+        "x": 293,
+        "y": 286,
         "wires": [
             []
         ]
@@ -956,8 +956,8 @@
         "wires": [
             [
                 "6fb92ae3.9046d4",
-                "b6dac308.49254",
-                "e463e62d.1b9c18"
+                "e463e62d.1b9c18",
+                "2d05d8fe.db2438"
             ]
         ]
     },
@@ -985,33 +985,17 @@
         ],
         "description": "notify a chosen user with a message of your choice.",
         "buttontype": "action",
-        "x": 316.8888854980469,
-        "y": 294.8888702392578,
+        "x": 309.8888854980469,
+        "y": 291.88885498046875,
         "wires": []
-    },
-    {
-        "id": "b6dac308.49254",
-        "type": "function",
-        "z": "b03d872f.c1fed8",
-        "name": "",
-        "func": "msg.payload = {success:true};\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 298.8888854980469,
-        "y": 391.77777099609375,
-        "wires": [
-            [
-                "4c689679.b39768"
-            ]
-        ]
     },
     {
         "id": "4c689679.b39768",
         "type": "http response",
         "z": "b03d872f.c1fed8",
         "name": "",
-        "x": 496.8888854980469,
-        "y": 376.77777099609375,
+        "x": 678.888916015625,
+        "y": 392.77777099609375,
         "wires": []
     },
     {
@@ -1588,5 +1572,66 @@
                 "ee5476b9.11ab88"
             ]
         ]
+    },
+    {
+        "id": "6dffaf9a.bb189",
+        "type": "inject",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 95,
+        "y": 1554,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2d05d8fe.db2438",
+        "type": "function",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "func": "msg.payload = {\n    recipients: [msg.payload.user.userId],\n    channels: [\"screen\",\"email\", \"sms\"],\n    developmentId: \"1\",\n    author: \"1\",\n    subject: \"message from wharfside\",\n    message: msg.payload.text, \n    \n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 301,
+        "y": 394,
+        "wires": [
+            [
+                "cf5ba5d7.5f87f8"
+            ]
+        ]
+    },
+    {
+        "id": "cf5ba5d7.5f87f8",
+        "type": "http request",
+        "z": "b03d872f.c1fed8",
+        "name": "call send api",
+        "method": "POST",
+        "ret": "obj",
+        "url": "https://wharfside.buttonkit.com/api/v1/send",
+        "x": 488,
+        "y": 393,
+        "wires": [
+            [
+                "4c689679.b39768"
+            ]
+        ]
+    },
+    {
+        "id": "23fdeeb1.0bba92",
+        "type": "debug",
+        "z": "b03d872f.c1fed8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 685,
+        "y": 1554,
+        "wires": []
     }
 ]
