@@ -1,5 +1,5 @@
 //create admin user
-CREATE (admin1:User {userId:'u1',password:'$2a$10$47ekZAc70msgRYA91WX7qOnYGHdYnrUH.v6c4CxnlWfwjXUCMm49K',  username:'system'});
+CREATE (admin1:User {userId:'1',password:'$2a$10$47ekZAc70msgRYA91WX7qOnYGHdYnrUH.v6c4CxnlWfwjXUCMm49K',  username:'system'});
 
 //create concierge office space c0ncierge0ffice
 MATCH (d:Development {name:'Wharfside'})
