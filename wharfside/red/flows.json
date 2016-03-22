@@ -731,8 +731,8 @@
         "url": "/directions",
         "method": "get",
         "swaggerDoc": "",
-        "x": 119,
-        "y": 1493,
+        "x": 143,
+        "y": 1491,
         "wires": [
             [
                 "b877382d.4788c8",
@@ -750,8 +750,8 @@
         "description": "directions to the new bike cages",
         "buttontype": "information",
         "returntype": "image",
-        "x": 356,
-        "y": 1433,
+        "x": 405,
+        "y": 1427,
         "wires": []
     },
     {
@@ -761,8 +761,8 @@
         "name": "",
         "func": "msg.payload = {success:true, data:\"/media/img/directions.png\"};\nreturn msg;",
         "outputs": 1,
-        "x": 334,
-        "y": 1591,
+        "x": 363,
+        "y": 1573,
         "wires": [
             [
                 "c5d5e867.3a2a18"
@@ -775,7 +775,7 @@
         "z": "157822a6.d6c065",
         "name": "",
         "x": 578,
-        "y": 1559,
+        "y": 1573,
         "wires": []
     },
     {
@@ -1025,8 +1025,8 @@
         "upsert": false,
         "multi": false,
         "operation": "delete",
-        "x": 596.0003967285156,
-        "y": 539.888916015625,
+        "x": 621.0003662109375,
+        "y": 545.888916015625,
         "wires": []
     },
     {
@@ -1167,8 +1167,8 @@
         "url": "/logstore",
         "method": "get",
         "swaggerDoc": "",
-        "x": 86.88888549804688,
-        "y": 1729,
+        "x": 91.88888549804688,
+        "y": 1760,
         "wires": [
             [
                 "ee5476b9.11ab88",
@@ -1182,11 +1182,11 @@
         "type": "function",
         "z": "157822a6.d6c065",
         "name": "extract collection",
-        "func": "var datastore = msg.payload.datastore;\nvar collection = datastore.storeId;\nmsg.collection = collection;\nmsg.limit = 1000;\nmsg.skip = 0;\nmsg.payload = {};\nreturn msg;",
+        "func": "console.log(\"payload is\");\nconsole.log(msg.payload);\nvar datastore = msg.payload.datastore;\nvar collection = datastore.storeId;\nmsg.collection = collection;\nmsg.limit = 1000;\nmsg.skip = 0;\nmsg.schema = msg.payload.datastore.schema;\nmsg.payload = {};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 289.8888854980469,
-        "y": 1818,
+        "x": 340.8888854980469,
+        "y": 1832,
         "wires": [
             [
                 "80fb15f4.7f04e8"
@@ -1198,8 +1198,8 @@
         "type": "http response",
         "z": "157822a6.d6c065",
         "name": "",
-        "x": 845.888916015625,
-        "y": 1753,
+        "x": 1109.888916015625,
+        "y": 1855,
         "wires": []
     },
     {
@@ -1218,7 +1218,7 @@
         "description": "This will return the data from a log store in a table.",
         "buttontype": "information",
         "returntype": "tabular",
-        "x": 267.8888854980469,
+        "x": 309.8888854980469,
         "y": 1658,
         "wires": []
     },
@@ -1254,8 +1254,8 @@
         "active": true,
         "console": "false",
         "complete": "payload",
-        "x": 887.888916015625,
-        "y": 1877.4443359375,
+        "x": 1142.888916015625,
+        "y": 2005.4443359375,
         "wires": []
     },
     {
@@ -1303,11 +1303,11 @@
         "id": "f54e4cca.0ab1b",
         "type": "debug",
         "z": "b03d872f.c1fed8",
-        "name": "",
+        "name": "parcel pickup",
         "active": true,
         "console": "false",
-        "complete": "false",
-        "x": 334.888916015625,
+        "complete": "payload",
+        "x": 344.888916015625,
         "y": 666.3333740234375,
         "wires": []
     },
@@ -1363,11 +1363,11 @@
         "name": "retrieve records",
         "collection": "",
         "operation": "find",
-        "x": 484,
-        "y": 1818,
+        "x": 543,
+        "y": 1832,
         "wires": [
             [
-                "1107945d.eef86c"
+                "4589eaeb.4fa014"
             ]
         ]
     },
@@ -1376,11 +1376,11 @@
         "type": "function",
         "z": "157822a6.d6c065",
         "name": "format results",
-        "func": "var moment = context.global.moment;\n \n \n//pull out all keys to create a [{id:,label:},{id:,label:}] for display\n//note that keys are optional - if not provided buttonkit infers from ids\n//in rows\nvar keydict = msg.payload.reduce(function(acc, item){\n    item.data.forEach(function(row){\n      acc[row.id]=row.label\n    });\n    return acc;\n},{});\n\nvar keys = Object.keys(keydict).map(function(key){\n    return {id:key, label:keydict[key]};    \n});\n\nvar data = msg.payload.map(function(item){\n   delete item._id;\n   \n  \n   var rows = item.data.reduce(function(acc, col){\n        var type = col.type;\n        var value = col.value;\n        var key = col.id;\n        \n        //need to figure out how we display a datastore item!\n        switch(type){\n            case \"signature\":\n                acc[key] = \"<a class='th' href='\" + value + \"'><img src='\" + value  + \"'></a>\";\n                break;\n            case \"users\":\n                acc[key] = value.firstname + \" \" + value.surname;\n                break;\n            case \"ts\":\n                acc[key] = moment(value).format(\"MMMM Do YYYY, h:mm:ss\");  \n                break;\n            default:\n                acc[key] = value;\n        }\n        return acc;\n   },{});\n\n   return rows;\n});\nmsg.payload = {data:data, keys:keys, success:true};\nreturn msg;",
+        "func": "var moment = context.global.moment;\n \n\nvar keydict = msg.payload.reduce(function(acc, item){\n    item.data.forEach(function(row){\n      acc[row.id]=row.label\n    });\n    return acc;\n},{});\n\nvar keys = Object.keys(keydict).map(function(key){\n    return {id:key, label:keydict[key]};    \n});\n\nvar data = msg.payload.map(function(item){\n   delete item._id;\n   \n   var rows = item.data.reduce(function(acc, col){\n        var type = col.type;\n        var value = col.value;\n        var key = col.id;\n        \n        //need to figure out how we display a datastore item!\n        switch(type){\n            case \"signature\":\n                acc[key] = \"<a class='th' href='\" + value + \"'><img src='\" + value  + \"' height='25%' width='25%'></a>\";\n                break;\n            case \"users\":\n                acc[key] = value.firstname + \" \" + value.surname;\n                break;\n            case \"ts\":\n                acc[key] = moment(value).format(\"MMMM Do YYYY, h:mm:ss\");  \n                break;\n            default:\n                acc[key] = value;\n        }\n        return acc;\n   },{});\n\n   return rows;\n});\nmsg.payload = {data:data, keys:keys, success:true};\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 666,
-        "y": 1818,
+        "x": 914,
+        "y": 1921,
         "wires": [
             [
                 "6cf4395a.930bc8",
@@ -1396,8 +1396,8 @@
         "active": true,
         "console": "false",
         "complete": "payload",
-        "x": 287,
-        "y": 1722,
+        "x": 325,
+        "y": 1761,
         "wires": []
     },
     {
@@ -1549,8 +1549,8 @@
         "repeat": "",
         "crontab": "",
         "once": false,
-        "x": 104,
-        "y": 1964,
+        "x": 65,
+        "y": 1995,
         "wires": [
             [
                 "85c64766.7a39b8"
@@ -1565,8 +1565,8 @@
         "func": "msg.payload ={\n    datastore : {\n        storeId: 'collected'\n    }\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 266,
-        "y": 1965,
+        "x": 205,
+        "y": 1996,
         "wires": [
             [
                 "ee5476b9.11ab88"
@@ -1632,6 +1632,35 @@
         "complete": "false",
         "x": 685,
         "y": 1554,
+        "wires": []
+    },
+    {
+        "id": "4589eaeb.4fa014",
+        "type": "function",
+        "z": "157822a6.d6c065",
+        "name": "schemify",
+        "func": "var assign = context.global.assign;\nvar objectPath = context.global.objectPath;\nvar paths = msg.schema ? msg.schema.path ? msg.schema.path : [] : [];\n\nvar _translate = function(path){\n\treturn path.split(\".\").map(function(item, i){\n\t\treturn i === 0 ? \"\"+item : \"data.\"+ item ;\n\t\t\n\t}).join(\".value.value.\");\n};\n\nvar _filter = function(paths, obj){\n\t\n\tvar copyobj = assign([],obj);\n\n\treturn paths.reduce(function(acc, item, i){\n\t\tvar found = objectPath.get(copyobj, _translate(item));\n\t\tif (found){\n\t\t\tfound.label = msg.schema.alias ? msg.schema.alias[i] : \"\";\n\t\t\tfound.id = item;\n\t\t\tacc.push(found);\n\t\t}\n\t\treturn acc;\n\t}.bind(this),[]);\n};\n\nif (paths && paths.length > 0){\n    msg.payload = msg.payload.map(function(result){\n\t    result.data = _filter(paths,result.data);\n\t\treturn result;\n\t});\n\t\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 716.5,
+        "y": 1830.5,
+        "wires": [
+            [
+                "1107945d.eef86c",
+                "ce283bf.a7b8dc8"
+            ]
+        ]
+    },
+    {
+        "id": "ce283bf.a7b8dc8",
+        "type": "debug",
+        "z": "157822a6.d6c065",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 890.5,
+        "y": 1747.5,
         "wires": []
     }
 ]
