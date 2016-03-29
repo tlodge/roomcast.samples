@@ -10,8 +10,8 @@ CREATE (b1:Button {buttonId:'b1',  type:'action', name:'report leak', descriptio
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {questionId:'q0', number:0, question:'how severe is the leak?', type:'options', values:'{"options":"urgent, moderate, low","multiple":"single","none":true}'})
-CREATE (q1:Question {questionId:'q1', number:1, question:'where the leak is coming from (if known)', type:'freetext', values:'{"length":"medium"}'})
-CREATE (q2:Question {questionId:'q2', number:2, question:'anything else we need to know', type:'freetext', values:'{"length":"medium"}'})
+CREATE (q1:Question {questionId:'q1', number:1, question:'where is the leak coming from (if known)?', type:'freetext', values:'{"length":"medium"}'})
+CREATE (q2:Question {questionId:'q2', number:2, question:'anything else we need to know?', type:'freetext', values:'{"length":"medium"}'})
 CREATE (b1)-[:ASKS]->(q0)
 CREATE (b1)-[:ASKS]->(q1)
 CREATE (b1)-[:ASKS]->(q2)
@@ -28,18 +28,18 @@ CREATE b1-[:MEMBER_OF]->(cat);
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b2',  type:'action', name:'new fob', description:'Use this button if you require a new parking? door? fob.  If the fob is a re-issue (i.e. it has been lost/damaged), the charge for a new one is £35. If the fob is faulty we will replace it free of charge.  If you are a new resident, we require a £70 deposit.  We will typically aim to have a new fob ready for you within 2-3 working days and will contact you when it is ready to be picked up.',created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b2',  type:'action', name:'new fob', description:'Use this button if you require a new parking or door fob.  If the fob is a re-issue (i.e. it has been lost/damaged), the charge for a new one is £30. If the fob is a new issue it will be supplied free of charge but we require a £50 deposit per fob.  We will typically aim to have a new fob ready for you within 24 hours and will contact you when it is ready to be picked up.',created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
-CREATE (q0:Question {questionId:'q0', number:0, question:'why do you need a new fob?', type:'options', values:'{"options":"new resident, lost, damaged, stopped working","multiple":"single","none":true}'})
-CREATE (q1:Question {questionId:'q1', number:1, question:'how many do you need?', type:'options', values:'{"options":"1,2,3,4","multiple":"single","none":true}'})
+CREATE (q0:Question {questionId:'q0', number:0, question:'what door do you need a fob for?', type:'options', values:'{"options":"garage, south block entrance, north block entrance","multiple":"single","none":true}'})
+CREATE (q1:Question {questionId:'q1', number:1, question:'how many do you need?', type:'options', values:'{"options":"1,2","multiple":"single","none":true}'})
 CREATE (b1)-[:ASKS]->(q0)
 CREATE (b1)-[:ASKS]->(q1)
 WITH b1
 MATCH (bag1:AccessGroup {name:'tenant'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
-CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thanks, your new fob request is now in the system.  We will aim get back to you within 1-3 working days for you to pick it up from the concierge office.'})
+CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thanks, your new fob request is now in the system.  We will aim get back to you within 24 hours for you to pick it up from the concierge office.'})
 WITH b1
 MATCH (cat:ButtonCategory {name:'Concierge'})
 CREATE b1-[:MEMBER_OF]->(cat);
@@ -49,27 +49,29 @@ CREATE b1-[:MEMBER_OF]->(cat);
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b3',  type:'action', name:'key release', description:'Use this button when you would like us to <strong>release keys</strong> to a third party to get access to your apartment.  Although we will do our best to keep an eye on anyone entering your apartment <strong>we cannot be accept liability for any issues that arise during the access period</strong>',created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b3',  type:'action', name:'key release', description:'Use this button when you would like us to <strong>release keys</strong> to your property for a visitor or contractor',created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
-CREATE (q0:Question {questionId:'q0', number:0, question:'what is the name of the person/party requiring access?', type:'freetext', values:'{"length":"small"}'})
-CREATE (q1:Question {questionId:'q1', number:1, question:'what date with they need access on?', type:'date', values:'{"fromto":"single"}'})
-CREATE (q2:Question {questionId:'q2', number:2, question:'how long (roughly) do you expect them to need?', type:'options', values:'{"options":"a few minutes,about an hour,a few hours, all day","multiple":"single","none":true}'})
+CREATE (q0:Question {questionId:'q0', number:0, question:'who is the key to be released to?', type:'freetext', values:'{"length":"small"}'})
+CREATE (q1:Question {questionId:'q1', number:1, question:'when will they be arriving?', type:'date', values:'{"fromto":"single"}'})
+CREATE (q2:Question {questionId:'q2', number:2, question:'how long (roughly) do you expect them to need?', type:'options', values:'{"options":"one hour, two hours, under half a day, a full day, more than a day","multiple":"single","none":true}'})
+CREATE (q3:Question {questionId:'q3', number:3, question:'who is the key to be released to?', type:'freetext', values:'{"length":"small"}'})
+CREATE (q4:Question {questionId:'q4', number:4, question:'contact number in emergency', type:'freetext', values:'{"length":"phone"}'})
+CREATE (q5:Question {questionId:'q5', number:5, question:'please provide your signature', type:'signature', values:'{}'})
 CREATE (b1)-[:ASKS]->(q0)
 CREATE (b1)-[:ASKS]->(q1)
 CREATE (b1)-[:ASKS]->(q2)
+CREATE (b1)-[:ASKS]->(q3)
+CREATE (b1)-[:ASKS]->(q4)
+CREATE (b1)-[:ASKS]->(q5)
 WITH b1
 MATCH (bag1:AccessGroup {name:'tenant'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
 CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thanks, we will issue the keys to your aparment as per your instructions; we will inform you when the keys have been picked up.'})
 WITH b1
-CREATE (e1:Webhook {webhookId:'wh2',name:"notify staff", method:"POST", url:"http://red:1880/notify", parameters:'{"static":[{"id":"message","value":"my new message!"},{"id":"residentids","value":[{"id":"122","name":"owners"},{"id":"123","name":"tenants"},{"id":"124","name":"residents"}]}]}'})
-CREATE (b1)-[:CALLS]->(e1)
-WITH b1
 MATCH (cat:ButtonCategory {name:'Concierge'})
 CREATE b1-[:MEMBER_OF]->(cat);
-
 
 //************ property issue - goes to maintenance *************
 MATCH (d:Development {name:'Wharfside'})
@@ -117,7 +119,7 @@ WITH b1
 MATCH (bag1:AccessGroup {name:'tenant'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
-CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thank you for the report.  We will aim to investigate all noise disturbances promptly.'})
+CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thank you for the report.  We will aim to investigate all noise disturbances promptly and report our findings to you in two working days'})
 WITH b1
 MATCH (cat:ButtonCategory {name:'Security'})
 CREATE b1-[:MEMBER_OF]->(cat);
@@ -145,29 +147,65 @@ WITH b1
 MATCH (cat:ButtonCategory {name:'Security'})
 CREATE b1-[:MEMBER_OF]->(cat);
 
-
-//************ dry cleaning - goes to dry cleaner *************
+//************ property letting *************
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b7',  type:'action', name:'dry cleaning', description:'use this button if you would like to have items dry cleaned.  We have an arrangement with <strong>[Dry Cleaners inc]</strong> who we believe offer the best service in this area.  Costs are: shirts <strong>£5</strong>,  single bed sheets (2 pillow cases, duvet covers, and sheet): <strong>£25</strong>, double bed sheets:   (2 pillow cases, duvet covers, and sheet):  <strong>£29</strong>, suits: <strong>£25</strong>, dresses: <strong>£25</strong>.', created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b6',  type:'action', name:'property letting', description:'use this to notify us of a property viewing.  Access is granted <strong> monday to friday: 9am to 7pm</strong> and <strong> saturday: 10am to 4pm </strong> we cannot provide access on sundays and bank holidays.  Special appointment viewings outside these times may be made via the owner and development manager', created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
-CREATE (q0:Question {questionId:'q0', number:0, question:'please list the items you would like cleaned', type:'freetext', values:'{"length":"medium"}'})
-CREATE (q1:Question {questionId:'q1', number:1, question:'would you like them to be returned to you (£5)?', type:'options', values:'{"options":"yes,no","multiple":"single","none":true}'})
-CREATE (q2:Question {questionId:'q2', number:2, question:'which service do you require?', type:'options', values:'{"options":"48 hours, 24 hours (+£5), 2 hours (+15)","multiple":"single","none":true}'})
+CREATE (q0:Question {questionId:'q0', number:0, question:'which estate agent / person is the appointment with', type:'freetext', values:'{"length":"small"}'})
+CREATE (q1:Question {questionId:'q1', number:1, question:'what time is the appointment', type:'dateandtime', values:'{"fromto":"single"}'})
 CREATE (b1)-[:ASKS]->(q0)
 CREATE (b1)-[:ASKS]->(q1)
-CREATE (b1)-[:ASKS]->(q2)
 WITH b1
 MATCH (bag1:AccessGroup {name:'tenant'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
-CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thank you, we will be in contact to arrange the details shortly.'})
+CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thank you, we will contact you if there are any issues with this appointment'})
 WITH b1
-MATCH (cat:ButtonCategory {name:'Dry Cleaner'})
+MATCH (cat:ButtonCategory {name:'Concierge'})
 CREATE b1-[:MEMBER_OF]->(cat);
 
+
+MATCH (d:Development {name:'Wharfside'})
+MATCH (s:Status {type:'published'})
+WITH d,s
+CREATE (b1:Button {created:1459245492083, description:'wharfside pet policy', name:'pet policy',buttonId:'0x54f073c9dd000000', type:'information', modified:1459245492083})
+CREATE (b1)-[:BELONGS_TO]->(d)
+CREATE (b1)-[:HAS_STATUS]->(s)
+WITH b1
+MATCH (bag1:AccessGroup {name:'tenant'})
+CREATE (bag1)-[:CAN_PRESS]->(b1)
+WITH b1
+CREATE (e1:Webhook {description:'This provides the latest policy on pets.', name:'pet policy', method:'GET', parameters:'{"static":[],"dynamic":[]}', webhookId: '0x54f073c9dd800000', url:'http://red:1880/petpolicy', returntype:'text'})
+CREATE (b1)-[:CALLS]->(e1)
+WITH b1
+MATCH (cat:ButtonCategory {name:'Residents Association'})
+CREATE b1-[:MEMBER_OF]->(cat);
+
+
+//************ dry cleaning - goes to dry cleaner *************
+//MATCH (d:Development {name:'Wharfside'})
+//MATCH (s:Status {type:'published'})
+//WITH d,s
+//CREATE (b1:Button {buttonId:'b7',  type:'action', name:'dry cleaning', description:'use this button if you would like to have items dry cleaned.  We have an arrangement with <strong>[Dry Cleaners inc]</strong> who we believe offer the best service in this area.  Costs are: shirts <strong>£5</strong>,  single bed sheets (2 pillow cases, duvet covers, and sheet): <strong>£25</strong>, double bed sheets:   (2 pillow cases, duvet covers, and sheet):  <strong>£29</strong>, suits: <strong>£25</strong>, dresses: <strong>£25</strong>.', created:1453394322, modified:1453394322})
+//CREATE (b1)-[:BELONGS_TO]->(d)
+//CREATE (b1)-[:HAS_STATUS]->(s)
+//CREATE (q0:Question {questionId:'q0', number:0, question:'please list the items you would like cleaned', type:'freetext', values:'{"length":"medium"}'})
+//CREATE (q1:Question {questionId:'q1', number:1, question:'would you like them to be returned to you (£5)?', type:'options', values:'{"options":"yes,no","multiple":"single","none":true}'})
+//CREATE (q2:Question {questionId:'q2', number:2, question:'which service do you require?', type:'options', values:'{"options":"48 hours, 24 hours (+£5), 2 hours (+15)","multiple":"single","none":true}'})
+//CREATE (b1)-[:ASKS]->(q0)
+//CREATE (b1)-[:ASKS]->(q1)
+//CREATE (b1)-[:ASKS]->(q2)
+//WITH b1
+//MATCH (bag1:AccessGroup {name:'tenant'})
+//CREATE (bag1)-[:CAN_PRESS]->(b1)
+//WITH b1
+//CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thank you, we will be in contact to arrange the details shortly.'})
+//WITH b1
+//MATCH (cat:ButtonCategory {name:'Dry Cleaner'})
+//CREATE b1-[:MEMBER_OF]->(cat);
 
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
