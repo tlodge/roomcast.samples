@@ -6,7 +6,7 @@ CREATE (s1:Status {type:'unpublished'});
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b1',  type:'action', name:'report leak', description:'Use this button when you have noticed a leak <strong> in your flat </strong> or somewhere <strong> within the wharfside estate</strong>. We will need to know the severity of the leak, the location and any other details that you feel may be relevant.',created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b_water_leak',  type:'action', name:'report leak', description:'Use this button when you have noticed a leak <strong> in your flat </strong> or somewhere <strong> within the wharfside estate</strong>. We will need to know the severity of the leak, the location and any other details that you feel may be relevant.',created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {questionId:'q0', number:0, question:'how severe is the leak?', type:'options', values:'{"options":"urgent, moderate, low","multiple":"single","none":true}'})
@@ -28,7 +28,7 @@ CREATE b1-[:MEMBER_OF]->(cat);
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b2',  type:'action', name:'new fob', description:'Use this button if you require a new parking or door fob.  If the fob is a re-issue (i.e. it has been lost/damaged), the charge for a new one is £30. If the fob is a new issue it will be supplied free of charge but we require a £50 deposit per fob.  We will typically aim to have a new fob ready for you within 24 hours and will contact you when it is ready to be picked up.',created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b_new_fob',  type:'action', name:'new fob', description:'Use this button if you require a new parking or door fob.  If the fob is a re-issue (i.e. it has been lost/damaged), the charge for a new one is £30. If the fob is a new issue it will be supplied free of charge but we require a £50 deposit per fob.  We will typically aim to have a new fob ready for you within 24 hours and will contact you when it is ready to be picked up.',created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {questionId:'q0', number:0, question:'what door do you need a fob for?', type:'options', values:'{"options":"garage, south block entrance, north block entrance","multiple":"single","none":true}'})
@@ -49,7 +49,7 @@ CREATE b1-[:MEMBER_OF]->(cat);
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b3',  type:'action', name:'key release', description:'Use this button when you would like us to <strong>release keys</strong> to your property for a visitor or contractor',created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b_key_release',  type:'action', name:'key release', description:'Use this button when you would like us to <strong>release keys</strong> to your property for a visitor or contractor',created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {questionId:'q0', number:0, question:'who is the key to be released to?', type:'freetext', values:'{"length":"small"}'})
@@ -77,7 +77,7 @@ CREATE b1-[:MEMBER_OF]->(cat);
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b4',  type:'action', name:'property issue', description:'use this button to report any issues related to the common parts of wharfside (faulty doors, worn carpets, broken lights etc).  These will be sent immediately to the maintenance team who aim to investigate all reports within 2 hours.', created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b_property_issue',  type:'action', name:'property issue', description:'use this button to report any issues related to the common parts of wharfside (faulty doors, worn carpets, broken lights etc).  These will be sent immediately to the maintenance team who aim to investigate all reports within 2 hours.', created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {questionId:'q0', number:0, question:'how urgent is it?', type:'options', values:'{"options":"high, medium, low","multiple":"single","none":true}'})
@@ -100,7 +100,7 @@ CREATE b1-[:MEMBER_OF]->(cat);
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b5',  type:'action', name:'report noise!', description:'use this button when there is excessive noise between <strong> 10pm and 7am </strong> that has been going on for more than <strong> 15 </strong> minutes.  Your report will be logged in the system for future reference and will be correlated with similar reports, should we need to take further action.', created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b_noise',  type:'action', name:'report noise!', description:'use this button when there is excessive noise between <strong> 10pm and 7am </strong> that has been going on for more than <strong> 15 </strong> minutes.  Your report will be logged in the system for future reference and will be correlated with similar reports, should we need to take further action.', created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {questionId:'q0', number:0, question:'what is the source of the noise?', type:'options', values:'{"options":"fellow resident, non-residents, machinery, vehicle, other","multiple":"single","none":true}'})
@@ -129,7 +129,7 @@ CREATE b1-[:MEMBER_OF]->(cat);
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b6',  type:'action', name:'antisocial behaviour', description:'use this button to notify us of any antisocial behaviour, for example: <strong> trespassing, vandalism, graffiti, litter</strong>.  We will aim to investigate any antisocial behaviour as a matter of priority.', created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b_antisocial',  type:'action', name:'antisocial behaviour', description:'use this button to notify us of any antisocial behaviour, for example: <strong> trespassing, vandalism, graffiti, litter</strong>.  We will aim to investigate any antisocial behaviour as a matter of priority.', created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {questionId:'q0', number:0, question:'what is the issue?', type:'options', values:'{"options":"trespasser, vandalism, graffiti, litter, assault, other","multiple":"single","none":true}'})
@@ -151,7 +151,7 @@ CREATE b1-[:MEMBER_OF]->(cat);
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b6',  type:'action', name:'property letting', description:'use this to notify us of a property viewing.  Access is granted <strong> monday to friday: 9am to 7pm</strong> and <strong> saturday: 10am to 4pm </strong> we cannot provide access on sundays and bank holidays.  Special appointment viewings outside these times may be made via the owner and development manager', created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b_property_letting',  type:'action', name:'property letting', description:'use this to notify us of a property viewing.  Access is granted <strong> monday to friday: 9am to 7pm</strong> and <strong> saturday: 10am to 4pm </strong> we cannot provide access on sundays and bank holidays.  Special appointment viewings outside these times may be made via the owner and development manager', created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {questionId:'q0', number:0, question:'which estate agent / person is the appointment with?', type:'freetext', values:'{"length":"small"}'})
@@ -171,7 +171,7 @@ CREATE b1-[:MEMBER_OF]->(cat);
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {created:1459245492083, description:'wharfside pet policy', name:'pet policy',buttonId:'0x54f073c9dd000000', type:'information', modified:1459245492083})
+CREATE (b1:Button {created:1459245492083, description:'wharfside pet policy', name:'pet policy',buttonId:'b_pet_policy', type:'information', modified:1459245492083})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 WITH b1
@@ -189,7 +189,7 @@ CREATE b1-[:MEMBER_OF]->(cat);
 //MATCH (d:Development {name:'Wharfside'})
 //MATCH (s:Status {type:'published'})
 //WITH d,s
-//CREATE (b1:Button {buttonId:'b7',  type:'action', name:'dry cleaning', description:'use this button if you would like to have items dry cleaned.  We have an arrangement with <strong>[Dry Cleaners inc]</strong> who we believe offer the best service in this area.  Costs are: shirts <strong>£5</strong>,  single bed sheets (2 pillow cases, duvet covers, and sheet): <strong>£25</strong>, double bed sheets:   (2 pillow cases, duvet covers, and sheet):  <strong>£29</strong>, suits: <strong>£25</strong>, dresses: <strong>£25</strong>.', created:1453394322, modified:1453394322})
+//CREATE (b1:Button {buttonId:'b_dry_cleaning',  type:'action', name:'dry cleaning', description:'use this button if you would like to have items dry cleaned.  We have an arrangement with <strong>[Dry Cleaners inc]</strong> who we believe offer the best service in this area.  Costs are: shirts <strong>£5</strong>,  single bed sheets (2 pillow cases, duvet covers, and sheet): <strong>£25</strong>, double bed sheets:   (2 pillow cases, duvet covers, and sheet):  <strong>£29</strong>, suits: <strong>£25</strong>, dresses: <strong>£25</strong>.', created:1453394322, modified:1453394322})
 //CREATE (b1)-[:BELONGS_TO]->(d)
 //CREATE (b1)-[:HAS_STATUS]->(s)
 //CREATE (q0:Question {questionId:'q0', number:0, question:'please list the items you would like cleaned', type:'freetext', values:'{"length":"medium"}'})
