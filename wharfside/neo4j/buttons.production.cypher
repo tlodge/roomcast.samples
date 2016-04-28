@@ -219,11 +219,11 @@ WITH b1
 MATCH (bag1:AccessGroup {name:'staff'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
-CREATE (wh1:Webhook {webhookId:'0x549fe5ca5b400001', name:'notify a user', method:'POST', parameters:'{"static":[],"dynamic":[]}', url:'http://red:1880/notify'})
+CREATE (wh1:Webhook {webhookId:'0x549fe5ca5b400001', name:'notify a user', method:'POST', parameters:'{"static":[],"dynamic":[]}', url:'http://red:1880/notifyparcel'})
 CREATE (wh2:Webhook {webhookId:'0x549fe5ca5b400000', name:'log', method:'POST', parameters:'{"static":[{"id":"name","value":"parcels"}],"dynamic":[{"type":"userId","id":"userId","title":"user who pressed"}]}', url: 'http://red:1880/log'})
 CREATE (b1)-[:CALLS]->(wh1)
 CREATE (b1)-[:CALLS]->(wh2)
-CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thanks for pressing the parcel delivery button'})
+CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'parcel delivery recorded'})
 WITH b1
 MATCH (cat:ButtonCategory {name:'Concierge'})
 CREATE b1-[:MEMBER_OF]->(cat);
