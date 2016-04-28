@@ -211,7 +211,7 @@ WITH d,s
 CREATE (b1:Button {buttonId:'0x549fe5ca5b000000', type:'action', name:'parcel delivery', description:"Use this when a new parcel has been delivered and you want to notify the user and record the parcel on the system",created:1453839559020, modified:1453839559020})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
-CREATE (q0:Question {values:'{}', questionId:'tyoe', number:2, question:'delivery type',  type:'options', values:'{"options":"amazon,registered letter, parcel, groceries, flowers, other","multiple":"single","none":true}'})
+CREATE (q0:Question {values:'{}', questionId:'type', number:2, question:'delivery type',  type:'options', values:'{"options":"amazon,registered letter, parcel, groceries, flowers, other","multiple":"single","none":true}'})
 CREATE (q1:Question {values:'{}', questionId:'user', number:1, question:'which user would you like to notify?', type:'users'})
 CREATE (b1)-[:ASKS]->(q0)
 CREATE (b1)-[:ASKS]->(q1)
