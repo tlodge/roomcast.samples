@@ -1,5 +1,3 @@
-use buttonkit
-
 db.stores.insert({'storeId':'parcels', 'name':'parcels', 'schema':[
 		{
 			"id" : 1,
