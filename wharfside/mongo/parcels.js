@@ -2,26 +2,22 @@ db.stores.insert({'storeId':'parcels', 'name':'parcels', 'schema':[
 		{
 			"id" : 1,
 			"label" : "which user would you like to notify?",
-			"type" : "users",
-			"value" : {}
+			"type" : "users"
 		},
 		{
 			"id" : 2,
 			"label" : "delivery type",
-			"type" : "options",
-			"value" : [],
+			"type" : "options"
 		},
 		{
 			"id" : "presser",
 			"label" : "button presser",
-			"type" : "user",
-			"value" : ""
+			"type" : "user"
 		},
 		{
 			"id" : "pressed",
 			"label" : "pressed",
-			"type" : "ts",
-			"value" : 0
+			"type" : "ts"
 		}]
 });
 
@@ -34,46 +30,39 @@ db.stores.insert({'storeId':'collected', 'name':'collected', 'schema':[
 							{
 								"id" : 1,
 								"label" : "which user would you like to notify?",
-								"type" : "users",
-								"value" : {}
+								"type" : "users"
 							},
 							{
 								"id" : 2,
 								"label" : "delivery type",
-								"type" : "options",
-								"value" : [],
+								"type" : "options"
 							},
 							{
 								"id" : "presser",
 								"label" : "button presser",
-								"type" : "user",
-								"value" : ""
+								"type" : "user"
 							},
 							{
 								"id" : "pressed",
 								"label" : "pressed",
-								"type" : "ts",
-								"value" : 0
+								"type" : "ts"
 							}
 				] 
 			},
 			{
 				"id" : 2,
 				"label" : "please provide your signature",
-				"type" : "signature",
-				"value" : ""
+				"type" : "signature"
 			},
 			{
 				"id" : "presser",
 				"label" : "button presser",
-				"type" : "user",
-				"value" : ""
+				"type" : "user"
 			},
 			{
 				"id" : "pressed",
 				"label" : "pressed",
-				"type" : "ts",
-				"value" : 0
+				"type" : "ts"
 			}
 ]});
 
