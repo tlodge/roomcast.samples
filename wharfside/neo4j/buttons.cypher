@@ -300,7 +300,7 @@ WITH d,s
 CREATE (b1:Button {description:'use this when a parcel has been picked up.', name:'parcel pickup', buttonId:'0x549fe611da000000', type:'action', created:1453839632232, modified:1453839632232})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
-CREATE (q0:Question {values:'{"store":{"storeId":"parcels","name":"parcels"}}', questionId: 'datastoreitem',number:1, question:'the parcel that has been picked up', type:'datastoreitem'})
+CREATE (q0:Question {values:'{"storeId":"parcels", questionId: 'datastoreitem',number:1, question:'the parcel that has been picked up', type:'datastoreitem'})
 CREATE (q1:Question {values:'{}', questionId:'signature', number:2, question:'please provide your signature', type:'signature'})
 CREATE (b1)-[:ASKS]->(q0)
 CREATE (b1)-[:ASKS]->(q1)
