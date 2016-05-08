@@ -16,7 +16,7 @@ CREATE (b1)-[:ASKS]->(q0)
 CREATE (b1)-[:ASKS]->(q1)
 CREATE (b1)-[:ASKS]->(q2)
 WITH b1
-MATCH (bag1:AccessGroup {name:'tenant'})
+MATCH (bag1:AccessGroup {name:'resident'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
 CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thanks for notifying us. We will aim to get back to you as soon as we can, and will respond immediately if the leak is urgent.'})
@@ -36,7 +36,7 @@ CREATE (q1:Question {questionId:'q1', number:1, question:'how many do you need?'
 CREATE (b1)-[:ASKS]->(q0)
 CREATE (b1)-[:ASKS]->(q1)
 WITH b1
-MATCH (bag1:AccessGroup {name:'tenant'})
+MATCH (bag1:AccessGroup {name:'resident'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
 CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thanks, your new fob request is now in the system.  We will aim get back to you within 24 hours for you to pick it up from the concierge office.'})
@@ -61,7 +61,7 @@ CREATE (b1)-[:ASKS]->(q1)
 CREATE (b1)-[:ASKS]->(q2)
 CREATE (b1)-[:ASKS]->(q3)
 WITH b1
-MATCH (bag1:AccessGroup {name:'tenant'})
+MATCH (bag1:AccessGroup {name:'resident'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
 CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thanks, we will issue the keys to your aparment as per your instructions; we will inform you when the keys have been picked up.'})
@@ -83,7 +83,7 @@ CREATE (b1)-[:ASKS]->(q0)
 CREATE (b1)-[:ASKS]->(q1)
 CREATE (b1)-[:ASKS]->(q2)
 WITH b1
-MATCH (bag1:AccessGroup {name:'tenant'})
+MATCH (bag1:AccessGroup {name:'resident'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
 CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thanks, maintenance have been notified and will investigate the issue shortly.  We will get back to you to let you know the outcome.'})
@@ -112,7 +112,7 @@ CREATE (b1)-[:ASKS]->(q3)
 CREATE (b1)-[:ASKS]->(q4)
 CREATE (b1)-[:ASKS]->(q5)
 WITH b1
-MATCH (bag1:AccessGroup {name:'tenant'})
+MATCH (bag1:AccessGroup {name:'resident'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
 CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thank you for the report.  We will aim to investigate all noise disturbances promptly and report our findings to you in two working days'})
@@ -135,7 +135,7 @@ CREATE (b1)-[:ASKS]->(q0)
 CREATE (b1)-[:ASKS]->(q1)
 CREATE (b1)-[:ASKS]->(q2)
 WITH b1
-MATCH (bag1:AccessGroup {name:'tenant'})
+MATCH (bag1:AccessGroup {name:'resident'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
 CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thank you for the report, we will aim to investigate the issue as a matter of priority.'})
@@ -155,7 +155,7 @@ CREATE (q1:Question {questionId:'q1', number:1, question:'what time is the appoi
 CREATE (b1)-[:ASKS]->(q0)
 CREATE (b1)-[:ASKS]->(q1)
 WITH b1
-MATCH (bag1:AccessGroup {name:'tenant'})
+MATCH (bag1:AccessGroup {name:'resident'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
 CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thank you, we will contact you if there are any issues with this appointment'})
@@ -171,11 +171,31 @@ CREATE (b1:Button {created:1459245492083, description:'wharfside pet policy', na
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 WITH b1
-MATCH (bag1:AccessGroup {name:'tenant'})
+MATCH (bag1:AccessGroup {name:'resident'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
 CREATE (e1:Webhook {description:'This provides the latest policy on pets.', name:'pet policy', method:'GET', parameters:'{"static":[],"dynamic":[]}', webhookId: '0x54f073c9dd800000', url:'http://red:1880/petpolicy', returntype:'html'})
 CREATE (b1)-[:CALLS]->(e1)
+WITH b1
+MATCH (cat:ButtonCategory {name:'Residents Association'})
+CREATE b1-[:MEMBER_OF]->(cat);
+
+
+//*********** feedback *************/
+MATCH (d:Development {name:'Wharfside'})
+MATCH (s:Status {type:'published'})
+WITH d,s
+CREATE (b1:Button {buttonId:'b_user_feedback',  type:'action', name:'feedback', description:'We would <strong> love </strong> it if you would take the time to give us feedback on what we're doing right and wrong.  These are early days and we are aware that much more can be done to improve Buttonkit, but we would love any suggestions / criticisms / feedback or ideas for other buttons', created:1453394322, modified:1453394322})
+CREATE (b1)-[:BELONGS_TO]->(d)
+CREATE (b1)-[:HAS_STATUS]->(s)
+CREATE (q0:Question {questionId:'q0', number:0, question:'please provide us with any feedback on using buttonkit', type:'freetext', values:'{"length":"large"}'})
+CREATE (b1)-[:ASKS]->(q0)
+CREATE (b1)-[:ASKS]->(q1)
+WITH b1
+MATCH (bag1:AccessGroup {name:'resident'})
+CREATE (bag1)-[:CAN_PRESS]->(b1)
+WITH b1
+CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thank you, we really appreciate your feedback and will get back to you with a response if appropriate.'})
 WITH b1
 MATCH (cat:ButtonCategory {name:'Residents Association'})
 CREATE b1-[:MEMBER_OF]->(cat);
@@ -195,7 +215,7 @@ CREATE b1-[:MEMBER_OF]->(cat);
 //CREATE (b1)-[:ASKS]->(q1)
 //CREATE (b1)-[:ASKS]->(q2)
 //WITH b1
-//MATCH (bag1:AccessGroup {name:'tenant'})
+//MATCH (bag1:AccessGroup {name:'resident'})
 //CREATE (bag1)-[:CAN_PRESS]->(b1)
 //WITH b1
 //CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thank you, we will be in contact to arrange the details shortly.'})
