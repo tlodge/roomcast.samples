@@ -185,7 +185,7 @@ CREATE b1-[:MEMBER_OF]->(cat);
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b_user_feedback',  type:'action', name:'feedback', description:'We would <strong> love </strong> it if you would take the time to give us feedback on what we're doing right and wrong.  These are early days and we are aware that much more can be done to improve Buttonkit, but we would love any suggestions / criticisms / feedback or ideas for other buttons', created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b_user_feedback',  type:'action', name:'feedback', description:'We would <strong> love </strong>it if you would take the time to give us feedback on what we are doing right and wrong.  These are early days and we are aware that much more can be done to improve Buttonkit, but all suggestions / criticisms / feedback or ideas for other buttons will be read and digested', created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {questionId:'q0', number:0, question:'please provide us with any feedback on using buttonkit', type:'freetext', values:'{"length":"large"}'})
