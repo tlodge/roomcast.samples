@@ -190,7 +190,6 @@ CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {questionId:'q0', number:0, question:'please provide us with any feedback on using buttonkit', type:'freetext', values:'{"length":"large"}'})
 CREATE (b1)-[:ASKS]->(q0)
-CREATE (b1)-[:ASKS]->(q1)
 WITH b1
 MATCH (bag1:AccessGroup {name:'resident'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
