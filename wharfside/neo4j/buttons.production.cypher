@@ -49,19 +49,17 @@ CREATE b1-[:MEMBER_OF]->(cat);
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {buttonId:'b_key_release',  type:'action', name:'key release', description:'Use this button when you would like us to <strong>release keys</strong> to your property for a visitor or contractor',created:1453394322, modified:1453394322})
+CREATE (b1:Button {buttonId:'b_key_release',  type:'action', name:'key release', description:'Use this button when you would like us to <strong>release keys</strong> to your property for a visitor or contractor.  Please note: <ul> <li> Key release authorisation will only be accepted via the use of this form.</li><li>Authorisation can only be accepted from a resident owner or tenant.</li><li>The office staff will require ID from the person requesting the key.</li><li>A copy of your authorisations and signatures of key recipients will be kept on file.</li><li>The key recipient will ensure that the key is signed back into the office at the end of the authorisation period.</li><li>We will not be held liable for any damages to your apartment caused by a third party whilst in possession of a key under your authorisation.</li><li>The Management team reserves the right to recover all costs related to damage caused to the building while a key is been used under your authorisation.</li></ul>',created:1453394322, modified:1453394322})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
-CREATE (q0:Question {questionId:'q0', number:0, question:'who is the key to be released to?', type:'freetext', values:'{"length":"small"}'})
+CREATE (q0:Question {questionId:'q0', number:0, question:'name of key recipient?', type:'freetext', values:'{"length":"small"}'})
 CREATE (q1:Question {questionId:'q1', number:1, question:'when will they be arriving?', type:'date', values:'{"fidelity":"dateandtime"}'})
 CREATE (q2:Question {questionId:'q2', number:2, question:'how long (roughly) do you expect them to need?', type:'options', values:'{"options":"one hour, two hours, under half a day, a full day, more than a day","multiple":"single","none":true}'})
-CREATE (q3:Question {questionId:'q3', number:3, question:'name of key recipient?', type:'freetext', values:'{"length":"small"}'})
-CREATE (q4:Question {questionId:'q4', number:4, question:'please provide your signature', type:'signature', values:'{}'})
+CREATE (q3:Question {questionId:'q3', number:3, question:'please provide your signature', type:'signature', values:'{}'})
 CREATE (b1)-[:ASKS]->(q0)
 CREATE (b1)-[:ASKS]->(q1)
 CREATE (b1)-[:ASKS]->(q2)
 CREATE (b1)-[:ASKS]->(q3)
-CREATE (b1)-[:ASKS]->(q4)
 WITH b1
 MATCH (bag1:AccessGroup {name:'tenant'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
@@ -176,7 +174,7 @@ WITH b1
 MATCH (bag1:AccessGroup {name:'tenant'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
-CREATE (e1:Webhook {description:'This provides the latest policy on pets.', name:'pet policy', method:'GET', parameters:'{"static":[],"dynamic":[]}', webhookId: '0x54f073c9dd800000', url:'http://red:1880/petpolicy', returntype:'text'})
+CREATE (e1:Webhook {description:'This provides the latest policy on pets.', name:'pet policy', method:'GET', parameters:'{"static":[],"dynamic":[]}', webhookId: '0x54f073c9dd800000', url:'http://red:1880/petpolicy', returntype:'html'})
 CREATE (b1)-[:CALLS]->(e1)
 WITH b1
 MATCH (cat:ButtonCategory {name:'Residents Association'})
