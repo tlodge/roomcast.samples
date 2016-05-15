@@ -278,7 +278,8 @@ WITH b1
 MATCH (bag1:AccessGroup {name:'staff'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
-CREATE (e1:Webhook {description:'This will return the data from a log store in a table.', name:'logstore', method:'GET', parameters:'{"static":[{"type":"datastore","id":"datastore","title":"name of the logstore you would like to display","value":{"storeId":"collected", "schema":[{"path":"1","alias":"user signature"},{"path":"0.1","alias":"parcel description"},{"path":"0.0","alias":"the user"}]}}],"dynamic":[]}', webhookId:'0x549fe6e161800001', url:'http://red:1880/logstore', returntype:'tabular'})
+
+CREATE (e1:Webhook {description:'This will return the data from a log store in a table.', name:'logstore', method:'GET', parameters:'{"static":[{"type":"datastore","id":"datastore","title":"name of the logstore you would like to display","value":{"storeId":"collected", "schema":[{"path":"1","alias":"signature"},{"path":"3","alias":"picked up"},{"path":"0.0","alias":"resident"},{"path":"0.1","alias":"type"}]}}],"dynamic":[]}', webhookId:'0x549fe6e161800001', url:'http://red:1880/logstore', returntype:'tabular'})
 CREATE (b1)-[:CALLS]->(e1)
 WITH b1
 MATCH (cat:ButtonCategory {name:'Concierge'})
