@@ -52,9 +52,10 @@ CREATE (RegisteringAG:AccessGroup {accessGroupId:'158', name:'registering', type
 CREATE (ReviewingAG:AccessGroup {accessGroupId:'159', name:'under review', type:'auth', prefix:'is'})
 CREATE (ValidatedAG:AccessGroup {accessGroupId:'160', name:'validated', type:'auth', prefix:'is'})
 CREATE (SuspendedAG:AccessGroup {accessGroupId:'161', name:'suspended', type:'auth', prefix:'is'})
+CREATE (ThirdPartyAG:AccessGroup {accessGroupId:'162', name:'thirdpartyregistered', type:'auth', prefix:'is'})
 
 //attach the access groups to entities that they belong to...note that the registeringag does not belong to anything (since a user will not have an associated development at this time)
-
+CREATE (ThirdPartyAG)-[:BELONGS_TO]->(d)
 CREATE (ReviewingAG)-[:BELONGS_TO]->(d)
 CREATE (ValidatedAG)-[:BELONGS_TO]->(d)
 CREATE (SuspendedAG)-[:BELONGS_TO]->(d)
