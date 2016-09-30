@@ -181,6 +181,25 @@ MATCH (cat:ButtonCategory {name:'Residents Association'})
 CREATE b1-[:MEMBER_OF]->(cat);
 
 
+
+MATCH (d:Development {name:'Wharfside'})
+MATCH (s:Status {type:'published'})
+WITH d,s
+CREATE (b1:Button {created:1453839844741, description:'users', name:'users',buttonId:'usersbutton', type:'information', modified:1453839844741})
+CREATE (b1)-[:BELONGS_TO]->(d)
+CREATE (b1)-[:HAS_STATUS]->(s)
+WITH b1
+MATCH (bag1:AccessGroup {name:'staff'})
+CREATE (bag1)-[:CAN_PRESS]->(b1)
+WITH b1
+CREATE (e1:Webhook {returntype:'users'})
+CREATE (b1)-[:CALLS]->(e1)
+WITH b1
+MATCH (cat:ButtonCategory {name:'Security'})
+CREATE b1-[:MEMBER_OF]->(cat);
+
+
+
 //*********** feedback *************/
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
@@ -278,25 +297,8 @@ WITH b1
 MATCH (bag1:AccessGroup {name:'staff'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
-
-CREATE (e1:Webhook {description:'This will return the data from a log store in a table.', name:'logstore', method:'GET', parameters:'{"static":[{"type":"datastore","id":"datastore","title":"name of the logstore you would like to display","value":{"storeId":"collected", "schema":[{"path":"1","alias":"signature"},{"path":"3","alias":"picked up"},{"path":"0.0","alias":"resident"},{"path":"0.1","alias":"type"}]}}],"dynamic":[]}', webhookId:'0x549fe6e161800001', url:'http://red:1880/logstore', returntype:'tabular'})
+CREATE (e1:Webhook {description:'This will return the data from a log store in a table.', name:'logstore', method:'GET', parameters:'{"static":[{"type":"datastore","id":"datastore","title":"name of the logstore you would like to display","value":{"storeId":"collected", "schema":[{"path":"1","alias":"user signature"},{"path":"0","alias":"picked up parcel(s)"},{"path":"2","alias":"staff member"}, {"path":"3","alias":"time picked up"}]}}],"dynamic":[]}', webhookId:'0x549fe6e161800001', url:'http://red:1880/logstore', returntype:'tabular'})
 CREATE (b1)-[:CALLS]->(e1)
-WITH b1
-MATCH (cat:ButtonCategory {name:'Concierge'})
-CREATE b1-[:MEMBER_OF]->(cat);
-
-MATCH (d:Development {name:'Wharfside'})
-MATCH (s:Status {type:'published'})
-WITH d,s
-CREATE (b1:Button {created:1467046260456, description:'register a user', name:'register',buttonId:'0x5564b15bba000000', type:'action', modified:1467046260456})
-CREATE (b1)-[:BELONGS_TO]->(d)
-CREATE (b1)-[:HAS_STATUS]->(s)
-CREATE (q0:Question {values:'{}', questionId: '0x5569b929d0400000',number:0, question:'please provide your details', type:'register'})
-CREATE (b1)-[:ASKS]->(q0)
-CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'new registrant created'})
-WITH b1
-MATCH (bag1:AccessGroup {name:'staff'})
-CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
 MATCH (cat:ButtonCategory {name:'Concierge'})
 CREATE b1-[:MEMBER_OF]->(cat);
