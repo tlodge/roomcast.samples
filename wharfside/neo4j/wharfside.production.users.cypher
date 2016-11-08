@@ -47,3 +47,5 @@ MATCH (a:Apartment {apartmentId:'u6'})
 MATCH (u:User {userId:'56'})
 CREATE (u)-[:RENTS]->(a) 
 CREATE (u)-[:LIVES_IN]->(a);
+
+CREATE INDEX ON :User(userId);

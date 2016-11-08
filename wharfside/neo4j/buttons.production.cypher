@@ -302,3 +302,5 @@ CREATE (b1)-[:CALLS]->(e1)
 WITH b1
 MATCH (cat:ButtonCategory {name:'Concierge'})
 CREATE b1-[:MEMBER_OF]->(cat);
+
+CREATE (s:Status {type:"awaiting response"});
