@@ -1,7 +1,6 @@
 CREATE (s:Status {type:'published'});
 CREATE (s1:Status {type:'unpublished'});
 
-
 //************ water leak  - goes to maintenance *************
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
@@ -163,7 +162,6 @@ WITH b1
 MATCH (cat:ButtonCategory {name:'Concierge'})
 CREATE b1-[:MEMBER_OF]->(cat);
 
-
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
@@ -180,24 +178,35 @@ WITH b1
 MATCH (cat:ButtonCategory {name:'Residents Association'})
 CREATE b1-[:MEMBER_OF]->(cat);
 
-
-
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {created:1453839844741, description:'users', name:'users',buttonId:'usersbutton', type:'information', modified:1453839844741})
+CREATE (b1:Button {created:1453839844841, description:'users', name:'users',buttonId:'users', type:'action', modified:1453839844741})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 WITH b1
-MATCH (bag1:AccessGroup {name:'staff'})
+CREATE (q0:Question {questionId:'q0', number:0, question:'users', type:'users', values:'{"features":["mail", "update"]}'})
+CREATE (b1)-[:ASKS]->(q0)
+MATCH (bag1:AccessGroup {name:'admin'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
-WITH b1
-CREATE (e1:Webhook {returntype:'users'})
-CREATE (b1)-[:CALLS]->(e1)
 WITH b1
 MATCH (cat:ButtonCategory {name:'Security'})
 CREATE b1-[:MEMBER_OF]->(cat);
 
+MATCH (d:Development {name:'Wharfside'})
+MATCH (s:Status {type:'published'})
+WITH d,s
+CREATE (b1:Button {created:1453839844841, description:'users', name:'users', buttonId:'usersstaff', type:'action', modified:1453839844741})
+CREATE (b1)-[:BELONGS_TO]->(d)
+CREATE (b1)-[:HAS_STATUS]->(s)
+WITH b1
+CREATE (q0:Question {questionId:'q0', number:0, question:'users', type:'users', values:'{"features":["mail"]}'})
+CREATE (b1)-[:ASKS]->(q0)
+MATCH (bag1:AccessGroup {name:'staff'})
+CREATE (bag1)-[:CAN_PRESS]->(b1)
+WITH b1
+MATCH (cat:ButtonCategory {name:'Security'})
+CREATE b1-[:MEMBER_OF]->(cat);
 
 
 //*********** feedback *************/
@@ -219,28 +228,6 @@ MATCH (cat:ButtonCategory {name:'Residents Association'})
 CREATE b1-[:MEMBER_OF]->(cat);
 
 
-//************ dry cleaning - goes to dry cleaner *************
-//MATCH (d:Development {name:'Wharfside'})
-//MATCH (s:Status {type:'published'})
-//WITH d,s
-//CREATE (b1:Button {buttonId:'b_dry_cleaning',  type:'action', name:'dry cleaning', description:'use this button if you would like to have items dry cleaned.  We have an arrangement with <strong>[Dry Cleaners inc]</strong> who we believe offer the best service in this area.  Costs are: shirts <strong>£5</strong>,  single bed sheets (2 pillow cases, duvet covers, and sheet): <strong>£25</strong>, double bed sheets:   (2 pillow cases, duvet covers, and sheet):  <strong>£29</strong>, suits: <strong>£25</strong>, dresses: <strong>£25</strong>.', created:1453394322, modified:1453394322})
-//CREATE (b1)-[:BELONGS_TO]->(d)
-//CREATE (b1)-[:HAS_STATUS]->(s)
-//CREATE (q0:Question {questionId:'q0', number:0, question:'please list the items you would like cleaned', type:'freetext', values:'{"length":"medium"}'})
-//CREATE (q1:Question {questionId:'q1', number:1, question:'would you like them to be returned to you (£5)?', type:'options', values:'{"options":"yes,no","multiple":"single","none":true}'})
-//CREATE (q2:Question {questionId:'q2', number:2, question:'which service do you require?', type:'options', values:'{"options":"48 hours, 24 hours (+£5), 2 hours (+15)","multiple":"single","none":true}'})
-//CREATE (b1)-[:ASKS]->(q0)
-//CREATE (b1)-[:ASKS]->(q1)
-//CREATE (b1)-[:ASKS]->(q2)
-//WITH b1
-//MATCH (bag1:AccessGroup {name:'resident'})
-//CREATE (bag1)-[:CAN_PRESS]->(b1)
-//WITH b1
-//CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thank you, we will be in contact to arrange the details shortly.'})
-//WITH b1
-//MATCH (cat:ButtonCategory {name:'Dry Cleaner'})
-//CREATE b1-[:MEMBER_OF]->(cat);
-
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
@@ -249,8 +236,10 @@ CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
 CREATE (q0:Question {values:'{}', questionId:'type', number:2, question:'delivery type',  type:'options', values:'{"options":"amazon,registered letter, parcel, groceries, flowers, other","multiple":"single","none":true}'})
 CREATE (q1:Question {values:'{}', questionId:'user', number:1, question:'which user would you like to notify?', type:'users'})
+CREATE (q2:Question {questionId:'funcy', number:3, question:'your unique parcel(s) code', type:'function', values:'{"url":"/api/v1/unique"}'})
 CREATE (b1)-[:ASKS]->(q0)
 CREATE (b1)-[:ASKS]->(q1)
+CREATE (b1)-[:ASKS]->(q2)
 WITH b1
 MATCH (bag1:AccessGroup {name:'staff'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
@@ -265,13 +254,14 @@ MATCH (cat:ButtonCategory {name:'Concierge'})
 CREATE b1-[:MEMBER_OF]->(cat);
 
 
+
 MATCH (d:Development {name:'Wharfside'})
 MATCH (s:Status {type:'published'})
 WITH d,s
-CREATE (b1:Button {description:'use this when a parcel has been picked up.', name:'parcel pickup', buttonId:'0x549fe611da000000', type:'action', created:1453839632232, modified:1453839632232})
+CREATE (b1:Button {description:'use this when a parcel is being picked up.', name:'parcel pickup', buttonId:'0x549fe611da000000', type:'action', created:1453839632232, modified:1453839632232})
 CREATE (b1)-[:BELONGS_TO]->(d)
 CREATE (b1)-[:HAS_STATUS]->(s)
-CREATE (q0:Question {values:'{"storeId":"parcels"}', questionId: 'datastoreitem',number:1, question:'the parcel that has been picked up', type:'datastoreitem'})
+CREATE (q0:Question {values:'{"storeId":"parcels"}', questionId: 'datastoreitem',number:1, question:'the parcel that is being picked up', type:'datastoreitem'})
 CREATE (q1:Question {values:'{}', questionId:'signature', number:2, question:'please provide your signature', type:'signature'})
 CREATE (b1)-[:ASKS]->(q0)
 CREATE (b1)-[:ASKS]->(q1)
@@ -279,7 +269,7 @@ WITH b1
 MATCH (bag1:AccessGroup {name:'staff'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
-CREATE (wh1:Webhook {name:'parcel pickup', method:'POST', parameters:'{"static":[],"dynamic":[{"type":"userId","id":"userId","title":"userId"}]}', webhookId: '0x549fe611da400000', url:'http://red:1880/parcel/pickup'})
+CREATE (wh1:Webhook {name:'parcel pickup', method:'POST', parameters:'{"static":[],"dynamic":[{"type":"userId","id":"userId","title":"userId"}]}', webhookId: '0x549fe611da400000', url:'http://localhost:1880/parcel/pickup'})
 CREATE (b1)-[:CALLS]->(wh1)
 CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thanks for pressing the parcel pickup button'})
 WITH b1

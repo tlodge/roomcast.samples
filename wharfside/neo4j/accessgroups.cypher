@@ -2,8 +2,7 @@ MATCH (d:Development {name:'Wharfside'})
 WITH d
 CREATE (OwnersAG:AccessGroup {accessGroupId:'122', name:'owner', type:'occupancy', prefix:'is'})
 CREATE (TenantsAG:AccessGroup {accessGroupId:'123',name:'tenant', type:'occupancy', prefix:'is'})
-CREATE (ResidentsAG:AccessGroup {accessGroupId:'124',name:'resident', type:'occupancy', prefix:'is'})
-
+CREATE (OwnerOccupantAG:AccessGroup {accessGroupId:'124',name:'owneroccupant', type:'occupancy', prefix:'is'})
 //relates to developmentId
 CREATE (AllAG:AccessGroup {accessGroupId:'1', name:'all', type:'development', prefix:'in'})
 CREATE (SouthBlockAG:AccessGroup {accessGroupId:'125',name: 'South Block', type:'block', prefix:'in'})
@@ -44,7 +43,7 @@ CREATE (LiftsAccessGroup:AccessGroup {accessGroupId:'154', name:'lifts', type:'s
 CREATE (CorridorAccessGroup:AccessGroup {accessGroupId:'155', name:'first floor corridor', type:'space', prefix:'in'})
 CREATE (ParkingAccessGroup:AccessGroup {accessGroupId:'156', name:'underground parking', type:'space', prefix:'in'})
 
-CREATE (StaffAccessGroup:AccessGroup {accessGroupId:'157', name:'staff', type:'role', prefix:'in'})
+CREATE (StaffAccessGroup:AccessGroup {accessGroupId:'157', name:'staff', type:'auth', prefix:'in'})
 
 //create to registration access groups.
 
@@ -52,18 +51,22 @@ CREATE (RegisteringAG:AccessGroup {accessGroupId:'158', name:'registering', type
 CREATE (ReviewingAG:AccessGroup {accessGroupId:'159', name:'under review', type:'auth', prefix:'is'})
 CREATE (ValidatedAG:AccessGroup {accessGroupId:'160', name:'validated', type:'auth', prefix:'is'})
 CREATE (SuspendedAG:AccessGroup {accessGroupId:'161', name:'suspended', type:'auth', prefix:'is'})
-CREATE (ThirdPartyAG:AccessGroup {accessGroupId:'162', name:'thirdpartyregistered', type:'auth', prefix:'is'})
+CREATE (ThirdPartyAG:AccessGroup {accessGroupId:'162', name:'new user', type:'auth', prefix:'is'})
+CREATE (ReadyAG:AccessGroup {accessGroupId:'163', name:'ready to signup', type:'auth', prefix:'is'})
+CREATE (AdminAG:AccessGroup {accessGroupId:'164', name:'admin', type:'auth', prefix:'is'})
 
 //attach the access groups to entities that they belong to...note that the registeringag does not belong to anything (since a user will not have an associated development at this time)
 CREATE (ThirdPartyAG)-[:BELONGS_TO]->(d)
 CREATE (ReviewingAG)-[:BELONGS_TO]->(d)
 CREATE (ValidatedAG)-[:BELONGS_TO]->(d)
 CREATE (SuspendedAG)-[:BELONGS_TO]->(d)
+CREATE (ReadyAG)-[:BELONGS_TO]->(d)
+CREATE (AdminAG)-[:BELONGS_TO]->(d)
 
 CREATE (AllAG)-[:BELONGS_TO]->(d)
 CREATE (OwnersAG)-[:BELONGS_TO]->(d)
 CREATE (TenantsAG)-[:BELONGS_TO]->(d)
-CREATE (ResidentsAG)-[:BELONGS_TO]->(d)
+CREATE (OwnerOccupantAG)-[:BELONGS_TO]->(d)
 CREATE (StaffAccessGroup)-[:BELONGS_TO]->(d);
 
 //south block

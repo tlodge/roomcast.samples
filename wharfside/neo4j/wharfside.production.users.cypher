@@ -17,6 +17,15 @@ CREATE (concierge1:User {userId:'u2',role:'staff', password:'$2a$10$pWxPclcYDDt7
 CREATE (concierge1)-[:BELONGS_TO]->(wharfsideconcierge);
 
 
+MATCH (d:Development {name:'Wharfside'})
+MATCH (staffag:AccessGroup {name:'staff'})
+MATCH (adminag:AccessGroup {name:'admin'})
+WITH d, staffag, adminag
+CREATE (admin:User {userId:'uadmin',role:'staff', password:'$2a$10$u.Ex6OHKf5E7EKyqk2LpOuRBnRVvAT9GOwDaUCalS25dFzVDyftfy', username:'wharfsideadmin', email:'sitemanagerwestburyresidential@gmail.com', mobile:'07972639571', firstname:'admin', surname:''})-[:AFFILIATED_WITH]->(d)
+CREATE (admin)-[:BELONGS_TO]->(staffag)
+CREATE (admin)-[:BELONGS_TO]->(adminag)
+CREATE UNIQUE (admin)-[:BELONGS_TO]->(ag:AccessGroup {accessGroupId:'uadmin', name:'private', type:'private'});
+
 //create a few test users t3stus3r1 etc
 MATCH (d:Development {name:'Wharfside'})
 WITH d
