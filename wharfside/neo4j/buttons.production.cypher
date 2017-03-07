@@ -187,6 +187,7 @@ CREATE (b1)-[:HAS_STATUS]->(s)
 WITH b1
 CREATE (q0:Question {questionId:'q0', number:0, question:'users', type:'users', values:'{"features":["mail", "update"]}'})
 CREATE (b1)-[:ASKS]->(q0)
+WITH b1
 MATCH (bag1:AccessGroup {name:'admin'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
@@ -202,6 +203,7 @@ CREATE (b1)-[:HAS_STATUS]->(s)
 WITH b1
 CREATE (q0:Question {questionId:'q0', number:0, question:'users', type:'users', values:'{"features":["mail"]}'})
 CREATE (b1)-[:ASKS]->(q0)
+WITH b1
 MATCH (bag1:AccessGroup {name:'staff'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
