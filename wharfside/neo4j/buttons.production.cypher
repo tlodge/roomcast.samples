@@ -271,7 +271,7 @@ WITH b1
 MATCH (bag1:AccessGroup {name:'staff'})
 CREATE (bag1)-[:CAN_PRESS]->(b1)
 WITH b1
-CREATE (wh1:Webhook {name:'parcel pickup', method:'POST', parameters:'{"static":[],"dynamic":[{"type":"userId","id":"userId","title":"userId"}]}', webhookId: '0x549fe611da400000', url:'http://localhost:1880/parcel/pickup'})
+CREATE (wh1:Webhook {name:'parcel pickup', method:'POST', parameters:'{"static":[],"dynamic":[{"type":"userId","id":"userId","title":"userId"}]}', webhookId: '0x549fe611da400000', url:'http://red:1880/parcel/pickup'})
 CREATE (b1)-[:CALLS]->(wh1)
 CREATE (b1)-[:RESPONDS_WITH]->(r:Response {text:'thanks for pressing the parcel pickup button'})
 WITH b1
